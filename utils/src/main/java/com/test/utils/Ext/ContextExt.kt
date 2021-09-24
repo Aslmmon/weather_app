@@ -35,11 +35,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.test.utils.Common.di.getSharedPrefrences
 import com.test.utils.R
 import com.test.utils.SPLASH_CLASS_NAME
-import com.test.utils.TOKEN_USER
-import com.test.utils.USER_ISVERIFIED
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -54,7 +51,11 @@ fun Context.createSpinner(
     fromTags: Boolean = false
 ): ArrayAdapter<String?> {
     val spinnerAdapter: ArrayAdapter<String?> =
-        object : ArrayAdapter<String?>(this, android.R.layout.simple_spinner_item, list as List<String?>) {
+        object : ArrayAdapter<String?>(
+            this,
+            android.R.layout.simple_spinner_item,
+            list as List<String?>
+        ) {
             override fun getCount(): Int {
                 val newList = mutableListOf<String>()
                 list.forEachIndexed { index, s ->
@@ -70,6 +71,7 @@ fun Context.createSpinner(
     spinnerAdapter.setDropDownViewResource(com.test.utils.R.layout.simple_spinner_dropdown_item)
     return spinnerAdapter
 }
+
 @SuppressLint("SimpleDateFormat")
 fun Activity?.isTimeWith_in_Interval(neededDate: String?): Boolean {
     var isBetween = false
@@ -89,8 +91,8 @@ fun Activity?.isTimeWith_in_Interval(neededDate: String?): Boolean {
 
     try {
         Log.i("value to check", neededDate.toString())
-       // Log.i("value to check", startTime.toString())
-     //   Log.i("value to check", endTime.toString())
+        // Log.i("value to check", startTime.toString())
+        //   Log.i("value to check", endTime.toString())
         val pattern = "yyyy-MM-dd hh:mm a"
         val simpleDateFormat = SimpleDateFormat(pattern)
 
@@ -106,14 +108,14 @@ fun Activity?.isTimeWith_in_Interval(neededDate: String?): Boolean {
     }
     return isBetween
 }
-fun Context.isUserVerifed(): Boolean {
-        val isLoggedIn = getSharedPrefrences(androidApplication = this).getString(TOKEN_USER, null)
-        val isVerified = getSharedPrefrences(androidApplication = this).getBoolean(USER_ISVERIFIED, false)
-        return isLoggedIn != null && isVerified
+//fun Context.isUserVerifed(): Boolean {
+//        val isLoggedIn = getSharedPrefrences(androidApplication = this).getString(TOKEN_USER, null)
+//        val isVerified = getSharedPrefrences(androidApplication = this).getBoolean(USER_ISVERIFIED, false)
+//        return isLoggedIn != null && isVerified
+//
+//}
 
-}
-
-fun Context.openUrl(url:String){
+fun Context.openUrl(url: String) {
     val i = Intent(Intent.ACTION_VIEW)
     i.data = Uri.parse(url)
     this.startActivity(i)
@@ -462,27 +464,27 @@ fun Context.showAlertDialog(title: String, message: String, launchFunction: () -
     dialog.show()
 }
 
-fun <T> Context.saveObject(key: String?, user: T) {
-    val gson = Gson()
-    val json: String = gson.toJson(user)
-    getSharedPrefrences(androidApplication = this).edit().putString(key, json).apply()
-}
+//fun <T> Context.saveObject(key: String?, user: T) {
+//    val gson = Gson()
+//    val json: String = gson.toJson(user)
+//    getSharedPrefrences(androidApplication = this).edit().putString(key, json).apply()
+//}
+//
+//fun <T> Context.getObject(key: String?, type: Class<T>): T? {
+//    val gson = Gson()
+//    val json: String? = getSharedPrefrences(androidApplication = this).getString(key, "")
+//    return gson.fromJson(json, type)
+//}
 
-fun <T> Context.getObject(key: String?, type: Class<T>): T? {
-    val gson = Gson()
-    val json: String? = getSharedPrefrences(androidApplication = this).getString(key, "")
-    return gson.fromJson(json, type)
-}
-
-fun <T> Context.saveList(key: String?, list: List<T>?) {
-    val gson = Gson()
-    val json: String = gson.toJson(list)
-    getSharedPrefrences(androidApplication = this).edit().putString(key, json).apply()
-}
-
-fun Context.getList(key: String): String? {
-    return getSharedPrefrences(this).getString(key, null)
-}
+//fun <T> Context.saveList(key: String?, list: List<T>?) {
+//    val gson = Gson()
+//    val json: String = gson.toJson(list)
+//    getSharedPrefrences(androidApplication = this).edit().putString(key, json).apply()
+//}
+//
+//fun Context.getList(key: String): String? {
+//    return getSharedPrefrences(this).getString(key, null)
+//}
 
 /**
  * To Json
@@ -497,25 +499,34 @@ inline fun <reified T : Any> String?.fromJson(): T? = this?.let {
     Gson().fromJson(this, type)
 }
 
-fun NotificationManager.sendNotification(messageBody: String, messageTitle: String, applicationContext: Context) {
+fun NotificationManager.sendNotification(
+    messageBody: String,
+    messageTitle: String,
+    applicationContext: Context
+) {
     val contentIntent = Intent(applicationContext, SPLASH_CLASS_NAME::class.java)
     contentIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
     contentIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
     val pendingIntent = PendingIntent.getActivity(
-            applicationContext, 5, contentIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+        applicationContext, 5, contentIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT
     )
 
     val builder = NotificationCompat.Builder(
-            applicationContext,
-            applicationContext.getString(R.string.notification_id)
+        applicationContext,
+        applicationContext.getString(R.string.notification_id)
     ).setContentTitle((messageTitle))
-            .setContentText(messageBody)
-            .setContentIntent(pendingIntent)
-            .setLargeIcon(BitmapFactory.decodeResource(applicationContext.resources, com.test.utils.R.drawable.ic_logo))
-            .setSmallIcon(com.test.utils.R.drawable.ic_logo)
-            .setAutoCancel(true)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setContentText(messageBody)
+        .setContentIntent(pendingIntent)
+        .setLargeIcon(
+            BitmapFactory.decodeResource(
+                applicationContext.resources,
+                com.test.utils.R.drawable.ic_logo
+            )
+        )
+        .setSmallIcon(com.test.utils.R.drawable.ic_logo)
+        .setAutoCancel(true)
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     notify(5, builder.build())
 }

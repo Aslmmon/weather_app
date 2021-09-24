@@ -44,7 +44,7 @@ object BuildConfig {
     }
 
     object Production {
-        const val BASE_URL = "\"https://made-home.com/\""
+        const val BASE_URL = "\"https://api.openweathermap.org/\""
     }
 
     object Debug {
