@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_bg">
+
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/teaBlue"
+        android:fontFamily="@font/din_arabic_regular"
+        android:text="@string/confirm_title"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_time"
+        tools:layout_editor_absoluteY="19dp" />
+
+
+    <EditText
+        android:id="@+id/ed_time"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:layout_marginStart="15dp"
+        android:drawableStart="@drawable/ic_clock"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/box_edit_text"
+        android:fontFamily="@font/din_arabic_regular"
+        android:hint="@string/_12_00_pm"
+        android:gravity="center"
+        android:paddingStart="5dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/ed_year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+        />
+
+    <EditText
+        android:id="@+id/ed_year"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="34dp"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/din_arabic_regular"
+        android:drawableStart="@drawable/ic_calendar"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/box_edit_text"
+        android:hint="dd/mm/yy"
+        android:paddingStart="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ed_time"
+        app:layout_constraintTop_toTopOf="@id/ed_time"
+        />
+
+    <ImageView
+        android:id="@+id/tv_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="11dp"
+        android:layout_margin="15dp"
+        android:src="@drawable/ic_icon_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/please_choose_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/din_arabic_bold"
+        android:text="@string/detect_order_time_title"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_close" />
+</androidx.constraintlayout.widget.ConstraintLayout>

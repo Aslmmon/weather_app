@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
+    <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <string name="welcome_to_floria_title">Welcome to Floria</string>
+    <string name="add_product_title"> إضافة منتج</string>
+    <string name="price">السعر</string>
+    <string name="Arabic">العربية</string>
+    <string name="English">English</string>
+    <string name="money">الحسابات</string>
+    <string name="products">المنتجات</string>
+    <string name="orders">الطلبات</string>
+    <string name="settings">الإعدادات</string>
+    <string name="flower_types">أنواع الورد</string>
+    <string name="title_complain">Enter Title more than 3 characters</string>
+    <string name="message_complain">  فضلاً أدخل على الأقل 3 حروف</string>
+    <string name="reply_title"> اكتب ردك هنا </string>
+
+    <string name="apartment_number_title">Apartment number </string>
+    <string name="in_progress_title">جاري الطلب</string>
+    <string name="shipped_title">جاهز للتوصيل</string>
+    <string name="deliverd_title">تم التوصيل </string>
+    <string name="canceld_title">الغاء </string>
+    <string name="fawry">فوري</string>
+    <string name="cash">كاش</string>
+    <string name="visa">فيزا</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="change_language"> تغيير اللغة</string>
+    <string name="sure">هل أنت متأكد, سيتم إعادة  تشغيل التطبيق في حاله الموافقة  ؟</string>
+
+    <string name="are_you_sure_you_want_to_cancel_order_title">هل أنت متأكد من الغاء الطلب الخاص بك ؟</string>
+    <string name="no_title">لا</string>
+    <string name="yes_title">نعم</string>
+    <string name="apartment_number">رقم الشقه</string>
+
+    <string name="status">الحالة</string>
+    <string name="total_orders_by_visa_title">Total Orders By visa</string>
+    <string name="floria">فلوريا</string>
+    <string name="you">أنت </string>
+    <string name="your_salary_from_order_title">Your Salary from Order</string>
+    <string name="log_out">صفحة تسجيل الخروج </string>
+    <string name="are_you_sure">هل أنت متأكد أنك تريد تسجيل الخروج ؟</string>
+    <string name="insert_number">فضلاً قم بإدخال رقم واحد علي الأقل</string>
+    <string name="questions_on_product_15_question_title">الأسئلة على المنتج</string>
+    <string name="have_a_question_title"><u>لديك سؤال ؟</u></string>
+    <string name="size_title">الوزن</string>
+    <string name="quantity_title">الكمية</string>
+    <string name="egp">ريال </string>
+
+    <string name="search_for_product_title">ابحث عن منتج او خدمة </string>
+    <string name="show_all_title"><u>عرض الكل</u></string>
+    <string name="best_food_title">أشهر وأفضل الأكلات</string>
+    <string name="all_food_is_awesome_subtitle"> جميع الأصناف والأطباق الأكثر شهرة في العالم\n
+ أدايبا يسكينج أليايت,سيت دو أيوسمود  \nتيمبورأنكايديديونتيوت لابوري</string>
+    <string name="loading">Loading</string>
+    <string name="enter_4_digits_of_verification_code_title">أدخل رمز التأكيد المكون من 4 أرقام لتفعيل حسابك </string>
+    <string name="done_sending_verification_code_title">تم إرسال رمز  التأكيد بنجاح</string>
+
+    <string name="resend_verification_code_title"><u>إعادة إرسال رمز التأكيد مرة أخري</u></string>
+    <string name="confirm_title">تأكيد</string>
+    <string name="please_wait_45_second">من فضلك إنتظر 45 ثانية</string>
+    <string name="timer_title">من فضلك إنتظر</string>
+    <string name="seconds_title"> ثانية</string>
+    <string name="delete_product_title">هل أنت متأكد من حذف المنتج من السلة ؟</string>
+    <string name="cancel_title">إلغاء</string>
+    <string name="delete_title">حذف</string>
+    <string name="done_adding_to_your_cart">تم إضافة المنتج للسلة بنجاح</string>
+    <string name="questions">سؤال</string>
+    <string name="try_again_with_customer" >يرجي التواصل مع خدمة العملاء لإستعادة حسابك</string>
+
+    <string name="go_to_cart_title">الذهاب لسلة المشتريات</string>
+    <string name="see_more">قراءة المزيد</string>
+    <string name="showLess">قراءة أقل</string>
+    <string name="Delivery_price">سعر التوصيل</string>
+    <string name="total_money_title">إجمالي المبلغ</string>
+    <string name="next">التالي</string>
+
+    <string name="order_price_title">سعر الطلب</string>
+    <string name="promo_code_title">كود الخصم</string>
+    <string name="order_product_title">طلب المنتج</string>
+    <string name="detect_order_time_title">تحديد وقت الطلب</string>
+    <string name="please_choose_time">من فضلك قم بتحديد وقت توصيل طلبك</string>
+    <string name="you_can_choose_title">حدد عنوانك على الخريطة ، يمكنك تعديل هذه
+البيانات لاحقاً في أي وقت </string>
+    <string name="_12_00_pm">12:00 PM</string>
+    <string name="notes_title">ملاحظات</string>
+    <string name="add">إضافة</string>
+    <string name="add_your_notes_on_order">اضف ملاحظاتك على الطلب</string>
+    <string name="enter_notes">من فضلك أدخل ملاحظاتك</string>
+    <string name="done_order">تم الطلب</string>
+    <string name="processing_title">جار التجهيز</string>
+    <string name="delivering_title">جار التوصيل</string>
+    <string name="deliverd">تم الإستلام</string>
+    <string name="money_needed"> المبلغ</string>
+    <string name="sha7n">تكلفة الشحن</string>
+    <string name="discount">الخصم</string>
+    <string name="upload_photo_of_receipt_title">أرفق صورة الإيصال</string>
+    <string name="old_password_title">كلمة المرور القديمة</string>
+    <string name="change_password">نغيير كلمة المرور</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="confirm_password_title">تأكيد كلمة المرور الجديدة</string>
+    <string name="save">حفظ</string>
+    <string name="attachment"> أرفق صورة الإيصال</string>
+    <string name="attach">أرفق</string>
+    <string name="document">تم رفع الايصال و حالته : </string>
+    <string name="account_number">حساب رقم</string>
+    <string name="accepted">accepted</string>
+    <string name="enter_missing">من فضلك أدخل البيانات الناقصة</string>
+    <string name="tax_money_title">إجمالي الضريبة</string>
+    <string name="forget_password">نسيت كلمة السر؟</string>
+    <string name="please_enter_your_number"> من فضلك قم بإدخال رقم هاتفك وسيتم إرسال رسالة نصية
+ بها رمز التأكيد لإعادة تعيين كلمة السر</string>
+    <string name="send">إرسال</string>
+    <string name="retry_password">إعادة تعيين كلمة السر</string>
+    <string name="how_was_your_order">كيف كانت عملية طلبك؟</string>
+    <string name="your_opinion_is_important_to_us">رأيك يهمنا لتحسين الخدمة لك لا تتردد وساعدنا برأيك</string>
+    <string name="rate_order_now">قيم طلبك الآن</string>
+    <string name="rate_order">تقييم الطلب</string>
+    <string name="rate_your_order">قيم طلبك</string>
+    <string name="write_your_comment_here">أكتب تعليقك هنا</string>
+    <string name="rate_your_delivery">قيم خدمة التوصيل</string>
+    <string name="rating">من فضلك أضف تقييم للطلب و التوصيل </string>
+    <string name="enter_comments">من فضلك أكتب تعليقك على الطلب و التوصيل</string>
+    <string name="choose_language">إختر اللغة</string>
+    <string name="done_sending_your_question">تم إرسال سؤالك بنجاح</string>
+    <string name="thanks_for_reaching_us_out">شكرا لك سيتم الرد على استفسارك في اقرب وقت ممكن</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="skip">تخطي</string>
+    <string name="signIn_first">من فضلك قم بتسجيل الدخول أولا !ً</string>
+    <string name="Loading">من قضلك انتظر …</string>
+    <string name="confirm_message">كلمه المرور الجديده و تأكيدها غير متطابقتان .</string>
+    <string name="enter_8_character">من فضلك أدخل على الأقل 8 أحرف أو أرقام </string>
+    <string name="congratulations">تهانيـــنا  !</string>
+    <string name="changed_password_success">تم  تغيير كلمة السر بنجاح</string>
+    <string name="done_reset_password">تم إستعادة كلمة السر بنجاح</string>
+    <string name="done_favourites">تم إضافة المنتج إلي المفضلة بنجاح</string>
+    <string name="done_verification">تهانينا تم تفعيل حسابك بنجاح </string>
+    <string name="one_question">سؤال</string>
+
+
+</resources>

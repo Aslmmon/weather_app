@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/insent_dialog">
+
+
+    <Button
+        android:id="@+id/btn_send_rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:backgroundTint="@color/teaBlue"
+        android:fontFamily="@font/din_arabic_regular"
+        android:text="@string/send"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_comment_delivery"/>
+
+
+    <EditText
+        android:id="@+id/ed_comment_delivery"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/box_edit_text"
+        android:fontFamily="@font/din_arabic_regular"
+        android:gravity="start"
+        android:hint="@string/write_your_comment_here"
+        android:maxLength="100"
+
+        android:padding="5dp"
+        android:textColor="@color/blackish"
+        android:textColorHint="@color/grayish"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rate_delivery" />
+
+
+    <EditText
+        android:id="@+id/ed_comment_order"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/box_edit_text"
+        android:fontFamily="@font/din_arabic_regular"
+        android:gravity="start"
+        android:hint="@string/write_your_comment_here"
+        android:maxLength="100"
+        android:padding="5dp"
+        android:textColor="@color/blackish"
+        android:textColorHint="@color/grayish"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rate_order" />
+
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_rate_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+    <RatingBar
+        android:id="@+id/rate_order"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:theme="@style/RatingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rate_title" />
+
+
+    <RatingBar
+        android:id="@+id/rate_delivery"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:numStars="5"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:isIndicator="false"
+        android:theme="@style/RatingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rate_delivery" />
+
+
+    <TextView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/din_arabic_bold"
+        android:text="@string/rate_order"
+        android:textColor="@color/blackish"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_rate_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/din_arabic_regular"
+        android:text="@string/rate_your_order"
+        android:textColor="@color/blackish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv" />
+
+
+    <TextView
+        android:id="@+id/tv_rate_delivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/din_arabic_regular"
+        android:text="@string/rate_your_delivery"
+        android:textColor="@color/blackish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_comment_order" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <FrameLayout
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:id="@+id/frame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_blue">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=" + "
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/tv_add"
+        />
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="1"
+        android:gravity="center"
+        android:id="@+id/tv_counter"
+        app:layout_constraintStart_toEndOf="@id/frame"
+        app:layout_constraintTop_toTopOf="@id/frame"
+        app:layout_constraintBottom_toBottomOf="@id/frame"
+        />
+
+
+
+    <FrameLayout
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:id="@+id/framesecond"
+        app:layout_constraintStart_toEndOf="@id/tv_counter"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=" - "
+            android:id="@+id/tv_minus"
+            android:gravity="center"
+            android:textColor="@color/grayish"
+            />
+
+    </FrameLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="150 reals"
+        android:id="@+id/tv_price"
+        app:layout_constraintStart_toEndOf="@id/framesecond"
+        app:layout_constraintTop_toTopOf="@id/framesecond"
+        app:layout_constraintBottom_toBottomOf="@id/framesecond"
+        android:layout_marginStart="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/titleBlack"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
