@@ -51,25 +51,6 @@ android {
 
         }
 
-//        getByName(BuildTypes.production) {
-//            isDebuggable = true
-//            //  isShrinkResources = true
-//            isMinifyEnabled = true
-//
-//            proguardFiles(
-//                getDefaultProguardFile("proguard-android-optimize.txt"),
-//                "proguard-rules.pro"
-//            )
-//
-//            buildConfigField(
-//                "String",
-//
-//                BuildConfig.BASE_URL,
-//                BuildConfig.Production.BASE_URL
-//            )
-//
-//
-//        }
 
     }
 
@@ -83,7 +64,7 @@ android {
 }
 
 dependencies {
-//    implementation(project(Libraries.coreModule))
+    implementation(project(Libraries.coreModule))
     implementation (Libraries.corotuines)
     implementation (Libraries.koinCore)
     api (Libraries.koinViewModelLibrary)
@@ -101,11 +82,9 @@ dependencies {
     implementation (Libraries.constraintLayout)
     implementation("androidx.navigation:navigation-runtime:2.3.5")
     implementation("androidx.navigation:navigation-fragment:2.3.5")
-    implementation("com.google.firebase:firebase-messaging:22.0.0")
     testImplementation (TestLibraries.junit4)
     implementation(Libraries.glide)
     implementation ("com.github.ybq:Android-SpinKit:1.4.0")
-    implementation(    "com.chaos.view:pinview:1.4.4")
     implementation(Libraries.hodenhofCircular)
     implementation(Libraries.autoImagesSLider)
     implementation("io.github.nikartm:image-support:2.0.0")

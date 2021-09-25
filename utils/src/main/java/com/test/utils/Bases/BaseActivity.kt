@@ -2,6 +2,7 @@ package com.test.utils.Bases
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.floriaapp.core.entity.CitiesEntities
 import com.test.utils.Common.CustomDialog
 import com.test.utils.Common.CustomProgress
 import com.test.utils.R
@@ -18,11 +19,14 @@ open class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         loadingDialog = CustomProgress()
         customDialog = CustomDialog()
-        //setLocale(ARABIC)
-//        getSharedPrefrenceInstance().getString(LANGUAGE_PREFRENCE, ENGLISH)
-//            ?.let { langugae -> setLocale(langugae) }
 
+    }
 
+    fun showCitiesDialog(
+        functionNeeded: (String) -> Unit,
+        citiis: List<CitiesEntities>
+    ) {
+        customDialog.showCitiesDialog(this,functionNeeded,citiis)
     }
 
     fun showProgress() {
@@ -35,12 +39,6 @@ open class BaseActivity : AppCompatActivity() {
     fun dismissProgressDialog() {
         loadingDialog.dismissDialog()
     }
-
-
-
-
-
-
 
 
 }

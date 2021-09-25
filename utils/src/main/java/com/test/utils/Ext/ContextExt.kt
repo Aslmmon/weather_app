@@ -37,10 +37,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.test.utils.R
 import com.test.utils.SPLASH_CLASS_NAME
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.OutputStream
+import java.io.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -72,48 +69,22 @@ fun Context.createSpinner(
     return spinnerAdapter
 }
 
-@SuppressLint("SimpleDateFormat")
-fun Activity?.isTimeWith_in_Interval(neededDate: String?): Boolean {
-    var isBetween = false
-//    val backEndFormat = "yyyy-MM-dd" // mention the format you need
-//    val sdf2 = SimpleDateFormat(backEndFormat, Locale.ENGLISH)
-//    val firstCalndar = Calendar.getInstance()
-//    firstCalndar.set(Calendar.HOUR, 10)
-//    firstCalndar.set(Calendar.MINUTE, 0)
-//    /**
-//     * 0 ->> AM
-//     * 1 ->> PM
-//     */
-//    firstCalndar.set(Calendar.AM_PM, 0)
-//
-//    val startTime = SimpleDateFormat("yyyy-MM-dd hh:mm a z", Locale.ENGLISH).format(firstCalndar.time)
-
-
-    try {
-        Log.i("value to check", neededDate.toString())
-        // Log.i("value to check", startTime.toString())
-        //   Log.i("value to check", endTime.toString())
-        val pattern = "yyyy-MM-dd hh:mm a"
-        val simpleDateFormat = SimpleDateFormat(pattern)
-
-        //    val time1: Date = SimpleDateFormat("hh:mm a z").parse(startTime)
-        val time2: Date = simpleDateFormat.parse(neededDate)
-        Log.i("value to check", time2.toString())
-        // val d: Date = SimpleDateFormat("HH:mm aa").parse(valueToCheck)
-//        if (time1.before(time2) || time2.after(time2)) {
-//            isBetween = true
-//        }
-    } catch (e: ParseException) {
+fun Context.getJsonFromAssets(context: Context, fileName: String?): String? {
+    val jsonString: String
+    jsonString = try {
+        val `is`: InputStream = this.assets.open(fileName!!)
+        val size: Int = `is`.available()
+        val buffer = ByteArray(size)
+        `is`.read(buffer)
+        `is`.close()
+        String(buffer, Charsets.UTF_8)
+    } catch (e: IOException) {
         e.printStackTrace()
+        return null
     }
-    return isBetween
+    return jsonString
 }
-//fun Context.isUserVerifed(): Boolean {
-//        val isLoggedIn = getSharedPrefrences(androidApplication = this).getString(TOKEN_USER, null)
-//        val isVerified = getSharedPrefrences(androidApplication = this).getBoolean(USER_ISVERIFIED, false)
-//        return isLoggedIn != null && isVerified
-//
-//}
+
 
 fun Context.openUrl(url: String) {
     val i = Intent(Intent.ACTION_VIEW)
@@ -189,19 +160,7 @@ fun Context.bitmapToFile(bitmap: Bitmap): File {
 }
 
 fun Activity.showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-//fun FragmentManager.getResultLauncher(): ActivityResultLauncher<Intent> {
-//    // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
-//    // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
-//    val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//        if (result.resultCode == Activity.RESULT_OK) {
-//            // There are no request codes
-//            val data: Intent? = result.data
-//            Toast.makeText(this, data.toString(), Toast.LENGTH_SHORT).show()
-//
-//        }
-//    }
-//    return resultLauncher
-//}
+
 /**
  * Manages the various graphs needed for a [BottomNavigationView].
  *

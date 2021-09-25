@@ -26,7 +26,7 @@ class CityListAdapter(private val interaction: OnItemClickOfProduct? = null) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SubjectViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.city_item,
+                R.layout.cities_item,
                 parent,
                 false
             ), interaction
