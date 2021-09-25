@@ -3,7 +3,6 @@ package com.test.utils
 import android.app.NotificationManager
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.test.utils.Ext.sendNotification
 
 //class NotificationService : FirebaseMessagingService() {
 //

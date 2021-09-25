@@ -1,4 +1,4 @@
-package com.floriaapp.core.use_cases
+package com.floriaapp.core.use_cases.forecast
 
 import com.floriaapp.core.repo.WeatherDataRepo
 

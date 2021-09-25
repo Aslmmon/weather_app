@@ -15,7 +15,6 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import com.test.utils.Ext.loadImage
 import com.test.utils.R
 
 class CustomProgress() {

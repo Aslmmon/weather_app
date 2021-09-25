@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">weather_app</string>
+    <string name="app_name">Weather App</string>
     <string name="search_for_city_title">Search for city</string>
     <string name="add_cities_up_to_5_cities">Add Cities up to 5 cities</string>
 </resources>

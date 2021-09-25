@@ -9,6 +9,7 @@ import android.net.Uri
 
 
 const val API_OPENWATHER_KEY = "01ed0bf33f0d52e1bad309739903a79b"
+const val CITIES_DATA = "cities"
 
 
 /**

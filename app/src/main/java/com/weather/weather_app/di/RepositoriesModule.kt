@@ -1,9 +1,11 @@
 package com.weather.weather_app.di
 
-import com.weather.weather_app.forecast.framework.WeatherDataRepoImplementation
+import com.weather.weather_app.features.forecast.framework.WeatherDataRepoImplementation
+import com.weather.weather_app.features.main.framework.MainHomeRepoImplementation
 import org.koin.dsl.module
 
 val repositoriesModule = module {
     factory { WeatherDataRepoImplementation(get()) }
+    factory { MainHomeRepoImplementation() }
 
 }

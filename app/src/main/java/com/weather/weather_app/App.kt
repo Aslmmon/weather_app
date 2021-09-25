@@ -1,5 +1,6 @@
 package com.weather.weather_app
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.weather.weather_app.di.*
@@ -9,7 +10,12 @@ import org.koin.core.context.startKoin
 
 class App : Application() {
 
-    lateinit var context: Context
+    companion object {
+        lateinit var context: Context
+        fun getAppContext(): Context {
+            return context
+        }
+    }
 
 
     override fun onCreate() {
@@ -22,6 +28,9 @@ class App : Application() {
                 useCasesModule))
         }
     }
+
+
+
 
 
 }

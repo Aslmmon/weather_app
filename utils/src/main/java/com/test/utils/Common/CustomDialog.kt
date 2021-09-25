@@ -35,13 +35,13 @@ class CustomDialog {
     }
 
     fun showCitiesDialog(
-        activity: Activity, functionNeeded: (String) -> Unit, citiis: List<CitiesEntities>
+        activity: Activity, functionNeeded: (CitiesEntities) -> Unit, citiis: List<CitiesEntities>
     ) {
         dialog = Dialog(activity)
         val adapter = CitiesListAdapter(object : CitiesListAdapter.OnItemClickOfProduct {
             override fun onItemClicked(position: Int, item: CitiesEntities) {
                 dialog?.dismiss()
-                functionNeeded(item.name)
+                functionNeeded(item)
             }
 
         })

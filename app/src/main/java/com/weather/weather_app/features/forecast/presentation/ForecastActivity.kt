@@ -1,4 +1,4 @@
-package com.weather.weather_app.forecast.presentation
+package com.weather.weather_app.features.forecast.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

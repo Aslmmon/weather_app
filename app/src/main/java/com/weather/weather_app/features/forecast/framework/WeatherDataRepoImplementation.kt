@@ -1,4 +1,4 @@
-package com.weather.weather_app.forecast.framework
+package com.weather.weather_app.features.forecast.framework
 
 import com.floriaapp.core.api.weatherApi
 import com.floriaapp.core.entity.WeatherNeededData
