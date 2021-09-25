@@ -6,4 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".features.forecast.presentation.ForecastActivity">
 
+
+    <com.weather.weather_app.common.custom_views.CustomToday
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/cu_today"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cu_today"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="2"
+        android:id="@+id/rv_temps"
+        tools:listitem="@layout/forecast_item"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

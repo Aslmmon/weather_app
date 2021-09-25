@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.floriaapp.core.entity.CitiesEntities
 import com.test.utils.Bases.BaseActivity
-import com.weather.weather_app.common.Ext.showToast
 import com.weather.weather_app.databinding.ActivityMainBinding
 import com.weather.weather_app.features.forecast.presentation.ForecastActivity
 import com.weather.weather_app.features.main.presentation.adapter.CityListAdapter
@@ -71,7 +70,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
     }
 
     override fun onItemClicked(position: Int, item: CitiesEntities) {
-        //  startActivity(Intent(this, ForecastActivity::class.java))
+          startActivity(Intent(this, ForecastActivity::class.java))
         //Toast.makeText(this,item.toString(),Toast.LENGTH_LONG).show()
     }
 

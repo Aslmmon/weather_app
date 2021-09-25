@@ -20,6 +20,7 @@ data class WeatherEntities(
 
 class City(
 )
+data class DateWithData(val date:String, val listNeeded:List<ListData>)
 
 data class ListData(
     @SerializedName("clouds")
@@ -41,7 +42,8 @@ data class ListData(
     @SerializedName("weather")
     val weather: List<Weather>,
     @SerializedName("wind")
-    val wind: Wind
+    val wind: Wind,
+    var datesOnly:String
 )
 
 data class Wind(
