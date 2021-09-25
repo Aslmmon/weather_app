@@ -63,6 +63,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     testImplementation (TestLibraries.junit4)
     implementation (Libraries.corotineCore)
+    implementation ("com.google.android.gms:play-services-location:18.0.0")
+
 
 
 }

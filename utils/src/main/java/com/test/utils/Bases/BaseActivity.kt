@@ -21,10 +21,18 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun showCitiesDialog(
-        functionNeeded: (CitiesEntities) -> Unit,
-        citiis: List<CitiesEntities>
+        functionNeeded: (((CitiesEntities)?) -> Unit)? = null,
+        searchFunctionality: (((CitiesEntities)?) -> Unit)? = null,
+        citiis: List<CitiesEntities>,
+        isFromSearch: Boolean = false
     ) {
-        customDialog.showCitiesDialog(this, functionNeeded, citiis)
+        customDialog.showCitiesDialog(
+            this,
+            functionNeeded,
+            citiis,
+            isFromSearch,
+            searchFunctionality
+        )
     }
 
     fun showProgress() {

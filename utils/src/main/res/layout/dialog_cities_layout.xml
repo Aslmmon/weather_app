@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/din_arabic_regular"
-        android:text="Choose City please"
+        android:text="@string/choose_city_please_title"
         android:textColor="@color/teaBlue"
         android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,13 +22,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <EditText
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_hint"
         app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/ed_search"
+        app:layout_constraintHorizontal_weight="2"
+        android:maxLines="1"
+        android:inputType="text|textNoSuggestions"
+        android:visibility="gone"
+        android:maxLength="50"
+        android:textColorHint="@color/blackish93"
+        android:layout_marginTop="10dp"
+        android:hint="@string/search_here_please_title"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_search"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:itemCount="3"
+        android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/rv_cities"
         tools:listitem="@layout/cities_item"

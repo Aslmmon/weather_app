@@ -1,6 +1,5 @@
 package com.weather.weather_app.common.Ext
 
-import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.ContextWrapper
@@ -13,32 +12,24 @@ import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
-import android.util.Log
-import android.util.SparseArray
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.NotificationCompat
-import androidx.core.util.forEach
-import androidx.core.util.set
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.test.utils.R
 import com.test.utils.SPLASH_CLASS_NAME
 import com.weather.weather_app.di.getSharedPrefrences
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.onStart
 import java.io.*
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Flow
 
 
 fun Context.createSpinner(
@@ -119,6 +110,35 @@ fun Context.getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): Strin
     }
     return strAdd
 }
+
+fun Context.getCountryName( latitude: Double, longitude: Double): String? {
+    val geocoder = Geocoder(this, Locale.getDefault())
+    var addresses: List<Address>? = null
+    try {
+        addresses = geocoder.getFromLocation(latitude, longitude, 1)
+        var result: Address
+        return if (addresses != null && addresses.isNotEmpty()) {
+            addresses[0].countryName
+        } else null
+    } catch (ignored: IOException) {
+        //do something
+        return null
+    }
+}
+//
+//fun EditText.textChanges(): Flow<CharSequence?> {
+//    return callbackFlow<CharSequence?> {
+//        val listener = object : TextWatcher {
+//            override fun afterTextChanged(s: Editable?) = Unit
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                trySend(s)
+//            }
+//        }
+//        addTextChangedListener(listener)
+//        awaitClose { removeTextChangedListener(listener) }
+//    }.onStart { emit(text) }
+//}
 //
 //@SuppressLint("RestrictedApi")
 //fun BottomNavigationView.disableShiftMode() {

@@ -134,6 +134,8 @@
     <string name="done_favourites">Product has been added to favorites successfully</string>
     <string name="done_verification">Congratulation on Activating your account</string>
     <string name="one_question">question</string>
+    <string name="choose_city_please_title">Choose City please</string>
+    <string name="search_here_please_title">Search Here Please</string>
 
 
 </resources>
