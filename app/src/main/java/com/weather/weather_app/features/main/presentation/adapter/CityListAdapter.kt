@@ -1,4 +1,4 @@
-package com.weather.weather_app.features.main.adapter
+package com.weather.weather_app.features.main.presentation.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

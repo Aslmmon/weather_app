@@ -8,6 +8,6 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { ForecastViewModel(get(), get()) }
-    viewModel { MainActivityViewModel(get(), get(),get()) }
+    viewModel { MainActivityViewModel(get(), get(),get(),get()) }
 
 }

@@ -36,4 +36,11 @@ class MainHomeRepoImplementation() : MainHomeRepo {
         newList.remove(city)
         return newList
     }
+
+    override fun isAllowedAddingCity(numberOfAllowedAddition: Int): Boolean {
+        return when (numberOfAllowedAddition) {
+            in 0..4 -> true
+            else -> false
+        }
+    }
 }

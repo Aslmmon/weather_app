@@ -8,7 +8,7 @@ import com.test.utils.Bases.BaseActivity
 import com.weather.weather_app.common.Ext.showToast
 import com.weather.weather_app.databinding.ActivityMainBinding
 import com.weather.weather_app.features.forecast.presentation.ForecastActivity
-import com.weather.weather_app.features.main.adapter.CityListAdapter
+import com.weather.weather_app.features.main.presentation.adapter.CityListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
@@ -37,6 +37,18 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
                 submitList(it)
                 notifyDataSetChanged()
             }
+            mainActivityViewModel.checkForAllowanceOfAddingCities(it.size)
+
+        })
+
+        mainActivityViewModel.isAllowedAddingCity.observe(this, Observer { resultAllowance ->
+            with(mainActivityBinding) {
+                when (resultAllowance) {
+                    true -> btnAdd.isClickable = true
+                    false -> btnAdd.isClickable = false
+
+                }
+            }
 
         })
 
@@ -59,12 +71,11 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
     }
 
     override fun onItemClicked(position: Int, item: CitiesEntities) {
-      //  startActivity(Intent(this, ForecastActivity::class.java))
+        //  startActivity(Intent(this, ForecastActivity::class.java))
         //Toast.makeText(this,item.toString(),Toast.LENGTH_LONG).show()
     }
 
     override fun onDeleteItemClicked(position: Int, item: CitiesEntities) {
-        showToast("delete clicked")
         mainActivityViewModel.removeCity(item, citiesMainList)
     }
 

@@ -7,5 +7,6 @@ interface MainHomeRepo {
     fun getCitiesData(): CitiesNeeded?
     fun addCity(city: CitiesEntities, citiesMainList: MutableList<CitiesEntities>):CitiesNeeded
     fun removeCity(city: CitiesEntities, citiesMainList: MutableList<CitiesEntities>):CitiesNeeded
+    fun isAllowedAddingCity(numberOfAllowedAddition:Int) :Boolean
 
 }
