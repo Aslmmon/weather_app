@@ -4,9 +4,17 @@ import com.floriaapp.core.entity.CitiesEntities
 import com.floriaapp.core.entity.CitiesNeeded
 
 interface MainHomeRepo {
-    fun getCitiesData(): CitiesNeeded?
-    fun addCity(city: CitiesEntities, citiesMainList: MutableList<CitiesEntities>):CitiesNeeded
-    fun removeCity(city: CitiesEntities, citiesMainList: MutableList<CitiesEntities>):CitiesNeeded
-    fun isAllowedAddingCity(numberOfAllowedAddition:Int) :Boolean
+    suspend fun getCitiesData(): CitiesNeeded?
+    suspend fun addCity(
+        city: CitiesEntities
+    )
+
+    suspend fun removeCity(
+        city: CitiesEntities
+    )
+
+    suspend fun getSavedCities():CitiesNeeded
+
+    fun isAllowedAddingCity(numberOfAllowedAddition: Int): Boolean
 
 }

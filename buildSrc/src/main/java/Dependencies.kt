@@ -24,6 +24,8 @@ object BuildPlugins {
     const val kotlinAndroid = "kotlin-android"
     const val kotlinAndroidExtensions = "kotlin-android-extensions"
     const val GoogleMapsPlugin = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
+    const val kapt =  "kotlin-kapt"
+
 
 }
 

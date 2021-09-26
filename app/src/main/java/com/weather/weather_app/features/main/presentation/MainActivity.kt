@@ -27,7 +27,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
     lateinit var mainActivityBinding: ActivityMainBinding
     private val mainActivityViewModel: MainActivityViewModel by viewModel()
-    var citiesMainList = mutableListOf<CitiesEntities>()
     var citiesList = mutableListOf<CitiesEntities>()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -44,7 +43,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
             btnAdd.setOnClickListener {
                 showCitiesDialog(citiis = citiesList,
                     functionNeeded = { city ->
-                        mainActivityViewModel.addCity(city!!, citiesMainList)
+                        mainActivityViewModel.addCity(city!!)
                     })
             }
         }
@@ -76,7 +75,10 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
                 );
             }
         }
-        mainActivityViewModel.addCity(CitiesEntities(1, "London"), citiesMainList)
+        mainActivityViewModel.addCity(CitiesEntities(1, "London"))
+        mainActivityViewModel.Error.observe(this, Observer {
+            showToast(it)
+        })
         mainActivityViewModel.getCitiesNeeded()
 
         observers()
@@ -84,7 +86,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
 
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                showToast(location?.latitude.toString())
+             //   showToast(location?.latitude.toString())
 //                getCountryName(location?.latitude!!,location.longitude)
                 // Got last known location. In some rare situations this can be null.
             }
@@ -150,7 +152,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
     }
 
     override fun onDeleteItemClicked(position: Int, item: CitiesEntities) {
-        mainActivityViewModel.removeCity(item, citiesMainList)
+        mainActivityViewModel.removeCity(item)
     }
 
 

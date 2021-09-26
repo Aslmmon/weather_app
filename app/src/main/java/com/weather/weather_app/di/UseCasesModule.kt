@@ -2,10 +2,7 @@ package com.weather.weather_app.di
 
 import com.floriaapp.core.use_cases.forecast.RequestWeatherData
 import com.floriaapp.core.use_cases.forecast.SaveWeatherData
-import com.floriaapp.core.use_cases.main_home.AddCity
-import com.floriaapp.core.use_cases.main_home.AllowAddCity
-import com.floriaapp.core.use_cases.main_home.GetCitiesData
-import com.floriaapp.core.use_cases.main_home.RemoveCity
+import com.floriaapp.core.use_cases.main_home.*
 import com.weather.weather_app.features.forecast.framework.WeatherDataRepoImplementation
 import com.weather.weather_app.features.main.framework.MainHomeRepoImplementation
 import org.koin.dsl.module
@@ -17,5 +14,6 @@ val useCasesModule = module {
     factory { RemoveCity(get() as MainHomeRepoImplementation) }
     factory { GetCitiesData(get() as MainHomeRepoImplementation) }
     factory { AllowAddCity(get() as MainHomeRepoImplementation) }
+    factory { GetSavedCities(get() as MainHomeRepoImplementation) }
 
 }

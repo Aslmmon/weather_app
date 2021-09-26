@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val repositoriesModule = module {
     factory { WeatherDataRepoImplementation(get()) }
-    factory { MainHomeRepoImplementation() }
+    factory { MainHomeRepoImplementation(get()) }
 
 }

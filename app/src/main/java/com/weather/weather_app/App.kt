@@ -25,7 +25,7 @@ class App : Application() {
             androidLogger()
             androidContext(this@App)
             modules(listOf(viewModelModule, repositoriesModule, sharedPref, networkModule,
-                useCasesModule))
+                useCasesModule, databaseModule))
         }
     }
 

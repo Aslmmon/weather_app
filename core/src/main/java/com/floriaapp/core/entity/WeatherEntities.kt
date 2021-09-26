@@ -1,7 +1,15 @@
 package com.floriaapp.core.entity
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
+import java.util.*
 
 typealias WeatherNeededData = List<ListData>
 
@@ -20,7 +28,14 @@ data class WeatherEntities(
 
 class City(
 )
-data class DateWithData(val date:String, val listNeeded:List<ListData>)
+
+const val TABLE_FORECAST = "forecastEntity"
+
+@Entity(tableName = TABLE_FORECAST)
+data class DateWithData(
+    @PrimaryKey val date: String,
+    @TypeConverters(DateConverter::class) val listNeeded: List<ListData>
+)
 
 data class ListData(
     @SerializedName("clouds")
@@ -43,7 +58,7 @@ data class ListData(
     val weather: List<Weather>,
     @SerializedName("wind")
     val wind: Wind,
-    var datesOnly:String
+    var datesOnly: String
 )
 
 data class Wind(
@@ -101,5 +116,25 @@ data class Sys(
     @SerializedName("pod")
     val pod: String
 )
+
+
+object DateConverter {
+
+    @TypeConverter
+    fun stringToList(data: String?): List<ListData> {
+        val gson = Gson()
+        if (data == null) {
+            return Collections.emptyList()
+        }
+        val listType: Type = object : TypeToken<List<ListData?>?>() {}.type
+        return gson.fromJson<List<ListData>>(data, listType)
+    }
+
+    @TypeConverter
+    fun listToString(myObjects: List<ListData>): String {
+        val gson = Gson()
+        return gson.toJson(myObjects)
+    }
+}
 
 

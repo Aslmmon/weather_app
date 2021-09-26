@@ -4,5 +4,5 @@ import com.floriaapp.core.entity.CitiesEntities
 import com.floriaapp.core.repo.MainHomeRepo
 
 class RemoveCity(private val mainHomeRepo: MainHomeRepo) {
-    operator fun invoke(city: CitiesEntities, citiesMainList: MutableList<CitiesEntities>) = mainHomeRepo.removeCity(city,citiesMainList)
+    suspend operator fun invoke(city: CitiesEntities) = mainHomeRepo.removeCity(city)
 }

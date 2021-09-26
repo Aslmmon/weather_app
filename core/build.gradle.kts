@@ -2,6 +2,8 @@ plugins {
     id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
+    id(BuildPlugins.kapt)
+
 }
 
 android {
@@ -43,10 +45,13 @@ dependencies {
     implementation (Libraries.constraintLayout)
     testImplementation (TestLibraries.junit4)
     implementation (Libraries.corotineCore)
-    implementation(Libraries.paging3)
     implementation (Libraries.viewModelScop)
     implementation (Libraries.Retrofit)
     implementation (Libraries.gson)
+    implementation("androidx.room:room-runtime:2.3.0")
+    kapt("androidx.room:room-compiler:2.3.0")
+    implementation ("androidx.room:room-ktx:2.3.0")
+
 
 
 }

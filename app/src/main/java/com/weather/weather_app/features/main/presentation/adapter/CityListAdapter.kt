@@ -63,11 +63,11 @@ class CityListAdapter(private val interaction: OnItemClickOfProduct? = null) :
         fun bind(data: CitiesEntities) = with(this.itemView) {
             findViewById<TextView>(R.id.tv_cityName).text = data.name
             findViewById<ImageView>(R.id.iv_delete).setOnClickListener {
-                interaction?.onDeleteItemClicked(bindingAdapterPosition, data)
+                interaction?.onDeleteItemClicked(adapterPosition, data)
             }
 
             setOnClickListener {
-                interaction?.onItemClicked(bindingAdapterPosition, data)
+                interaction?.onItemClicked(adapterPosition, data)
             }
 
 
