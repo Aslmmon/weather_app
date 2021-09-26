@@ -11,7 +11,6 @@ import org.koin.android.ext.android.inject
 
 open class BaseFragment : Fragment() {
     lateinit var loadingDialog: CustomProgress
-    var viewNeededToBeHidden: View? = null
     lateinit var customDialog: CustomDialog
     val sharedPrefrence: SharedPreferences by inject()
 
@@ -20,14 +19,8 @@ open class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
         loadingDialog = CustomProgress()
         customDialog = CustomDialog()
-//        sharedPrefrence.getString(LANGUAGE_PREFRENCE, ARABIC)
-//            ?.let { langugae -> requireActivity().setLocale(langugae) }
-
-
     }
 
-
-//
 
 
 }

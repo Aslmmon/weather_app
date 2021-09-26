@@ -23,6 +23,7 @@ class MainActivityViewModel(
 
     val citiesMainList: MutableLiveData<CitiesNeeded> = MutableLiveData()
     val isAllowedAddingCity: MutableLiveData<Boolean> = MutableLiveData()
+    val cityInteraction: MutableLiveData<Boolean> = MutableLiveData()
 
 
     fun getCitiesNeeded() {
@@ -35,10 +36,10 @@ class MainActivityViewModel(
         })
     }
 
-    fun addCity(city: CitiesEntities?) {
+    fun addCity(city: CitiesEntities) {
         launchDataLoad(execution = {
-            city?.let { adddCity(it) }
-            getSavedLists()
+             adddCity(city)
+            cityInteraction.value = true
         }, errorReturned = {
             Error.value = it.message.toString()
             Log.e("database add", it.message.toString())
@@ -59,7 +60,7 @@ class MainActivityViewModel(
         launchDataLoad(
             execution = {
                 RemoveCity(city)
-                getSavedLists()
+                cityInteraction.value = true
             },
             errorReturned = {
                 Error.value = it.message.toString()

@@ -9,14 +9,11 @@ import com.floriaapp.core.repo.ForecastRepo
 
 class WeatherDataRepoImplementation(
     var api: weatherApi,
-    var forecastDAO: ForecastDAO,
-    var mainCitiesListDAO: MainCitiesListDAO
+    var forecastDAO: ForecastDAO
 ) : ForecastRepo {
 
-    override suspend fun requestAllWeatherData(countryName: String?): List<ListData> {
-        val list = api.getWeatherData(countryName!!)
-        return list.list
-    }
+    override suspend fun requestAllWeatherData(countryName: String?) =
+        api.getWeatherData(countryName!!).list
 
 
     override suspend fun saveAllWeatherData(weatherData: CitiesEntities) =

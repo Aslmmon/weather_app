@@ -14,19 +14,4 @@ interface MainCitiesListDAO {
 
     @Delete
     suspend fun delete(stationEntity: CitiesEntities?)
-
-//
-//    @Transaction
-//    @Query("SELECT * FROM cityentity")
-//    suspend fun getCitiesAndData(): CityAndData
 }
-
-
-//data class CityAndData(
-//    @Embedded val citiesEntities: CitiesEntities,
-//    @Relation(
-//        parentColumn = "cityEntityId",
-//        entityColumn = "id"
-//    )
-//    val ListData: DateWithData
-//)

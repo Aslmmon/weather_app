@@ -80,8 +80,7 @@ dependencies {
     implementation(Libraries.appCompat)
     implementation(Libraries.googleMaterial)
     implementation (Libraries.constraintLayout)
-    implementation("androidx.navigation:navigation-runtime:2.3.5")
-    implementation("androidx.navigation:navigation-fragment:2.3.5")
+
     testImplementation (TestLibraries.junit4)
     implementation(Libraries.glide)
     implementation ("com.github.ybq:Android-SpinKit:1.4.0")

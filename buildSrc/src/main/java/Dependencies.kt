@@ -57,7 +57,7 @@ object BuildConfig {
 object Libraries {
     private object Versions {
         const val okHttp= "4.9.0"
-        const val jetpack = "1.3.0"
+        const val jetpack = "1.3.1"
         const val constraintLayout = "2.0.4"
         const val ktx = "1.5.0"
         const val google_material = "1.3.0"

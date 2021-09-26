@@ -14,7 +14,6 @@ buildscript {
 
         classpath (BuildPlugins.androidGradlePlugin)
         classpath (BuildPlugins.kotlinGradlePlugin)
-//        classpath ("com.google.gms:google-services:4.3.10")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
 
     }

@@ -65,6 +65,7 @@ class WeatherForecastsAdapter(private val interaction: OnItemClickOfProduct? = n
         fun bind(data: DateWithData) = with(this.itemView) {
             findViewById<TextView>(R.id.tv_date_name).text = itemView.context.getDayNameFromDate(data.date)
             val adapter = WeatherForecastDaysAdapter()
+
             findViewById<RecyclerView>(R.id.rv_forecasts).adapter = adapter
             findViewById<RecyclerView>(R.id.rv_forecasts).layoutManager =
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)

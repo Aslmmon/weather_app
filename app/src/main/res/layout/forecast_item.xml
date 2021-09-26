@@ -9,11 +9,12 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         tools:text="Day"
         android:gravity="center"
         android:textSize="20sp"
-        android:background="@color/blue_color"
+
+        android:background="@drawable/clody_rain"
         android:padding="20dp"
         android:fontFamily="@font/din_arabic_bold"
         android:textColor="@color/blackish"

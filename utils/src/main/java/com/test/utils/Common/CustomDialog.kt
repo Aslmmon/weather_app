@@ -83,13 +83,8 @@ class CustomDialog {
         activity: Activity
     ) {
 
-//        searchEditText!!.textChanges()
-//            .debounce(300)
         searchEditText?.addTextChangedListener { textWritten ->
-          //  Toast.makeText(activity,textWritten.toString(), Toast.LENGTH_SHORT).show()
-            val newList = citiis.filter { s -> s.name?.contains (textWritten.toString()) == true }.toMutableList()
-            Toast.makeText(activity,newList.toString(), Toast.LENGTH_SHORT).show()
-
+            val newList = citiis.filter { s -> s.name.contains (textWritten.toString()) }.toMutableList()
             adapter.submitList(newList)
             adapter.notifyDataSetChanged()
         }

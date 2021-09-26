@@ -12,11 +12,8 @@ import java.util.*
 
 typealias WeatherNeededData = List<ListData>
 
-const val TABLE_FORECAST = "forecastEntity"
 
 data class WeatherEntities(
-//    @SerializedName("city")
-//    val city: City,
     @SerializedName("cnt")
     val cnt: Int,
     @SerializedName("cod")
@@ -27,16 +24,13 @@ data class WeatherEntities(
     val message: Int
 )
 
-class City(
-)
 
-@Entity(tableName = TABLE_FORECAST)
 @Parcelize
 data class DateWithData(
-    @PrimaryKey(autoGenerate = true) var id: Int? = null,
+    var id: Int? = null,
     val date: String,
-    @TypeConverters(DateConverter::class) val listNeeded: List<ListData>
-):Parcelable
+    val listNeeded: List<ListData>
+) : Parcelable
 
 
 @Parcelize
@@ -45,7 +39,9 @@ data class ListData(
     val dtTxt: String,
     @SerializedName("main")
     val main: Main,
-):Parcelable
+    @SerializedName("weather")
+    val weather: List<Weather>,
+) : Parcelable
 
 data class Wind(
     @SerializedName("deg")
@@ -81,8 +77,9 @@ data class Main(
     val tempMax: Double,
     @SerializedName("temp_min")
     val tempMin: Double
-):Parcelable
+) : Parcelable
 
+@Parcelize
 data class Weather(
     @SerializedName("description")
     val description: String,
@@ -92,7 +89,7 @@ data class Weather(
     val id: Int,
     @SerializedName("main")
     val main: String
-)
+):Parcelable
 
 data class Clouds(
     @SerializedName("all")
@@ -105,7 +102,7 @@ data class Sys(
 )
 
 
-object DateConverter {
+object ListsDataConverter {
 
     @TypeConverter
     fun stringToList(data: String?): List<ListData>? {
@@ -144,9 +141,11 @@ object DateConverter {
     }
 
 
+
+
 }
 
-class MyTypeConverters {
+class MainObjectConverter {
 
     @TypeConverter
     fun appToString(app: Main): String = Gson().toJson(app)

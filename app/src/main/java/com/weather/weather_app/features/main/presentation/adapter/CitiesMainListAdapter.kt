@@ -13,13 +13,13 @@ import com.floriaapp.core.entity.CitiesEntities
 import com.floriaapp.core.entity.CitiesNeeded
 import com.weather.weather_app.R
 
-class CityListAdapter(private val interaction: OnItemClickOfProduct? = null) :
+class CitiesMainListAdapter(private val interaction: OnItemClickOfProduct? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CitiesEntities>() {
 
         override fun areItemsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) =
-            oldItem.cityEntityId == newItem.cityEntityId
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) =
             oldItem == newItem

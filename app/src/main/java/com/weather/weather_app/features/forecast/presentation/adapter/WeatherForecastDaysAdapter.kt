@@ -1,16 +1,20 @@
 package com.weather.weather_app.features.forecast.presentation.adapter
 
 import android.annotation.SuppressLint
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.floriaapp.core.entity.ListData
 import com.weather.weather_app.R
 import com.weather.weather_app.common.Ext.getDayNameFromDate
+import com.weather.weather_app.common.Ext.loadImage
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,10 +67,12 @@ class WeatherForecastDaysAdapter(private val interaction: OnItemClickOfProduct? 
 
         @SuppressLint("SetTextI18n")
         fun bind(data: ListData) = with(this.itemView) {
-
+            findViewById<ImageView>(R.id.iv_icon).loadImage("https://openweathermap.org/img/w/${data.weather[0].icon}.png")
             findViewById<TextView>(R.id.tv_date).text =
                 itemView.context.getDayNameFromDate(data.dtTxt.substringBefore(" "))
-            findViewById<TextView>(R.id.tv_temp).text = "${data.main.tempMin} / ${data.main.tempMax}"
+            findViewById<TextView>(R.id.tv_temp).text = "${data.main.temp} \u2103 "
+            findViewById<TextView>(R.id.tv_type_weather).text = data.weather[0].main
+            findViewById<TextView>(R.id.tv_feels_like).text = "${resources.getString(R.string.feels_like_title)} ${data.main.feelsLike} \u2103 "
 
 
         }

@@ -13,6 +13,7 @@ open class BaseActivity : AppCompatActivity() {
     lateinit var customDialog: CustomDialog
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadingDialog = CustomProgress()

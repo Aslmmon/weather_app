@@ -7,8 +7,8 @@ import com.floriaapp.core.db.dao.ForecastDAO
 import com.floriaapp.core.db.dao.MainCitiesListDAO
 import com.floriaapp.core.entity.*
 
-@Database(entities = [DateWithData::class, CitiesEntities::class], version = 8, exportSchema = false)
-@TypeConverters(MyTypeConverters::class,DateConverter::class)
+@Database(entities = [CitiesEntities::class], version = 10, exportSchema = false)
+@TypeConverters(MainObjectConverter::class, ListsDataConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun mainListDAO(): MainCitiesListDAO
     abstract fun foreCastDAO(): ForecastDAO

@@ -8,16 +8,18 @@ import com.floriaapp.core.entity.DateWithData
 import com.floriaapp.core.use_cases.forecast.RequestWeatherData
 
 class ForecastViewModel(
-    private val requestWeatherData: RequestWeatherData) : ViewModel() {
-
+    private val requestWeatherData: RequestWeatherData
+) : ViewModel() {
     val weatherData: MutableLiveData<MutableList<DateWithData>> = MutableLiveData()
 
 
     fun reuqestWeatherData(countryName: String, countryID: Int) {
-        launchDataLoad(execution = { weatherData.value = requestWeatherData.invoke(countryName,countryID) },
+        launchDataLoad(execution = {
+            weatherData.value = requestWeatherData.invoke(countryName, countryID)
+        },
             errorReturned = {
                 Log.e("error", it.message.toString())
-        })
+            })
     }
 
 }

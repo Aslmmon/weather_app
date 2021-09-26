@@ -1,37 +1,37 @@
 package com.weather.weather_app.common.Ext
 
 import android.annotation.SuppressLint
-import android.app.*
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
-import android.text.Editable
-import android.text.TextWatcher
+import android.os.Build
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.*
-import androidx.core.app.NotificationCompat
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.test.utils.R
-import com.test.utils.SPLASH_CLASS_NAME
 import com.weather.weather_app.di.getSharedPrefrences
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.onStart
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.Flow
 
 
 fun Context.createSpinner(
@@ -59,13 +59,62 @@ fun Context.createSpinner(
     spinnerAdapter.setDropDownViewResource(com.test.utils.R.layout.simple_spinner_dropdown_item)
     return spinnerAdapter
 }
+
+fun ImageView.loadImage(src: String? = null, srcInt: Int? = null, noPlaceHolder: Boolean? = false) {
+    if (noPlaceHolder == true) Glide.with(this.context).load(src ?: srcInt)
+        .error(com.test.utils.R.drawable.ic_profile_user)
+        .into(this)
+    else Glide.with(this.context).load(src ?: srcInt)
+        .placeholder(R.drawable.ic_loader).error(com.test.utils.R.drawable.ic_loader)
+        .into(this)
+}
+
 @SuppressLint("SimpleDateFormat")
-fun Context.getDayNameFromDate(date:String): String {
+fun Context.getDayNameFromDate(date: String): String {
     val dateParsed = SimpleDateFormat("dd-MM-yyyy").parse(date)
     val sdf = SimpleDateFormat("EEEE")
     val dayOfTheWeek = sdf.format(dateParsed)
     return dayOfTheWeek
 }
+
+fun Context.verifyAvailableNetwork(): Boolean {
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo = connectivityManager.activeNetworkInfo
+    return networkInfo != null && networkInfo.isConnected
+}
+
+fun Context.isInternetAvailable(): Boolean {
+    var result = false
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val networkCapabilities = connectivityManager.activeNetwork ?: return false
+        val actNw =
+            connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+        result = when {
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
+    } else {
+        connectivityManager.run {
+            connectivityManager.activeNetworkInfo?.run {
+                result = when (type) {
+                    ConnectivityManager.TYPE_WIFI -> true
+                    ConnectivityManager.TYPE_MOBILE -> true
+                    ConnectivityManager.TYPE_ETHERNET -> true
+                    else -> false
+                }
+
+            }
+        }
+    }
+
+    return result
+}
+
 fun Context.getJsonFromAssets(context: Context, fileName: String?): String? {
     val jsonString: String
     jsonString = try {
@@ -119,7 +168,7 @@ fun Context.getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): Strin
     return strAdd
 }
 
-fun Context.getCountryName( latitude: Double, longitude: Double): String? {
+fun Context.getCountryName(latitude: Double, longitude: Double): String? {
     val geocoder = Geocoder(this, Locale.getDefault())
     var addresses: List<Address>? = null
     try {
@@ -494,34 +543,34 @@ inline fun <reified T : Any> String?.fromJson(): T? = this?.let {
     Gson().fromJson(this, type)
 }
 
-fun NotificationManager.sendNotification(
-    messageBody: String,
-    messageTitle: String,
-    applicationContext: Context
-) {
-    val contentIntent = Intent(applicationContext, SPLASH_CLASS_NAME::class.java)
-    contentIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-    contentIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-    val pendingIntent = PendingIntent.getActivity(
-        applicationContext, 5, contentIntent,
-        PendingIntent.FLAG_UPDATE_CURRENT
-    )
-
-    val builder = NotificationCompat.Builder(
-        applicationContext,
-        applicationContext.getString(R.string.notification_id)
-    ).setContentTitle((messageTitle))
-        .setContentText(messageBody)
-        .setContentIntent(pendingIntent)
-        .setLargeIcon(
-            BitmapFactory.decodeResource(
-                applicationContext.resources,
-                com.test.utils.R.drawable.ic_logo
-            )
-        )
-        .setSmallIcon(com.test.utils.R.drawable.ic_logo)
-        .setAutoCancel(true)
-        .setPriority(NotificationCompat.PRIORITY_HIGH)
-
-    notify(5, builder.build())
-}
+//fun NotificationManager.sendNotification(
+//    messageBody: String,
+//    messageTitle: String,
+//    applicationContext: Context
+//) {
+//    val contentIntent = Intent(applicationContext, SPLASH_CLASS_NAME::class.java)
+//    contentIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+//    contentIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//    val pendingIntent = PendingIntent.getActivity(
+//        applicationContext, 5, contentIntent,
+//        PendingIntent.FLAG_UPDATE_CURRENT
+//    )
+//
+//    val builder = NotificationCompat.Builder(
+//        applicationContext,
+//        applicationContext.getString(R.string.notification_id)
+//    ).setContentTitle((messageTitle))
+//        .setContentText(messageBody)
+//        .setContentIntent(pendingIntent)
+//        .setLargeIcon(
+//            BitmapFactory.decodeResource(
+//                applicationContext.resources,
+//                com.test.utils.R.drawable.ic_logo
+//            )
+//        )
+//        .setSmallIcon(com.test.utils.R.drawable.ic_logo)
+//        .setAutoCancel(true)
+//        .setPriority(NotificationCompat.PRIORITY_HIGH)
+//
+//    notify(5, builder.build())
+//}

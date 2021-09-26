@@ -52,18 +52,10 @@ private fun retrofitClient(baseUrl: String): Retrofit =
 
 
 fun headersInterceptor() = Interceptor { chain ->
-
-//    val token = getSharedPrefrences(androidApplication = App.getAppContext()).getString(TOKEN_USER, "")
-//    val language = getSharedPrefrences(androidApplication = App.getAppContext()).getString(LANGUAGE_PREFRENCE, ARABIC)
-
-   // Log.i("language","lanugage in app is $language")
-
     chain.proceed(
             chain.request().newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Accept", "application/json")
-//                    .addHeader("Authorization", "Bearer $token")
-//                    .addHeader("Accept-Language", language.toString())
                     .build())
 }
 

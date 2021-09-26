@@ -9,11 +9,10 @@ import kotlinx.android.parcel.RawValue
 typealias CitiesNeeded = MutableList<CitiesEntities>
 
 const val TABLE_NAME = "CityEntity"
-
 @Entity(tableName = TABLE_NAME)
 @Parcelize
 data class CitiesEntities(
-    @PrimaryKey(autoGenerate = true) val cityEntityId: Int,
+    @PrimaryKey val id: Int,
     val name: String,
     var WeatherData: @RawValue List<DateWithData>? = null
 ) : Parcelable
