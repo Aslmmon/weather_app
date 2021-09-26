@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.floriaapp.core.entity.DateWithData
 import com.weather.weather_app.R
+import com.weather.weather_app.common.Ext.getDayNameFromDate
 
 
 class WeatherForecastsAdapter(private val interaction: OnItemClickOfProduct? = null) :
@@ -18,10 +19,10 @@ class WeatherForecastsAdapter(private val interaction: OnItemClickOfProduct? = n
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DateWithData>() {
 
-        override fun areItemsTheSame(oldItem: DateWithData, newItem:DateWithData) =
+        override fun areItemsTheSame(oldItem: DateWithData, newItem: DateWithData) =
             oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: DateWithData, newItem:DateWithData) =
+        override fun areContentsTheSame(oldItem: DateWithData, newItem: DateWithData) =
             oldItem == newItem
 
     }
@@ -62,12 +63,13 @@ class WeatherForecastsAdapter(private val interaction: OnItemClickOfProduct? = n
 
         @SuppressLint("SetTextI18n")
         fun bind(data: DateWithData) = with(this.itemView) {
-            findViewById<TextView>(R.id.tv_date_name).text = data.date
+            findViewById<TextView>(R.id.tv_date_name).text = itemView.context.getDayNameFromDate(data.date)
             val adapter = WeatherForecastDaysAdapter()
-            findViewById<RecyclerView>(R.id.rv_forecasts).adapter =adapter
-            findViewById<RecyclerView>(R.id.rv_forecasts).layoutManager =LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
+            findViewById<RecyclerView>(R.id.rv_forecasts).adapter = adapter
+            findViewById<RecyclerView>(R.id.rv_forecasts).layoutManager =
+                LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
 
-           // adapter.submitList(data.listNeeded)
+            adapter.submitList(data.listNeeded)
 
 //            setOnClickListener {
 //                interaction?.onItemClicked(bindingAdapterPosition, data)

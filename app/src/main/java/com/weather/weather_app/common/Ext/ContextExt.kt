@@ -1,5 +1,6 @@
 package com.weather.weather_app.common.Ext
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.ContextWrapper
@@ -28,6 +29,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
 import java.io.*
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Flow
 
@@ -57,7 +59,13 @@ fun Context.createSpinner(
     spinnerAdapter.setDropDownViewResource(com.test.utils.R.layout.simple_spinner_dropdown_item)
     return spinnerAdapter
 }
-
+@SuppressLint("SimpleDateFormat")
+fun Context.getDayNameFromDate(date:String): String {
+    val dateParsed = SimpleDateFormat("dd-MM-yyyy").parse(date)
+    val sdf = SimpleDateFormat("EEEE")
+    val dayOfTheWeek = sdf.format(dateParsed)
+    return dayOfTheWeek
+}
 fun Context.getJsonFromAssets(context: Context, fileName: String?): String? {
     val jsonString: String
     jsonString = try {

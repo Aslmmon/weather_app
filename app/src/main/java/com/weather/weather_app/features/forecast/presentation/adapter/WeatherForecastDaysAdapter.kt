@@ -8,9 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.floriaapp.core.entity.DateWithData
 import com.floriaapp.core.entity.ListData
 import com.weather.weather_app.R
+import com.weather.weather_app.common.Ext.getDayNameFromDate
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WeatherForecastDaysAdapter(private val interaction: OnItemClickOfProduct? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -30,7 +32,7 @@ class WeatherForecastDaysAdapter(private val interaction: OnItemClickOfProduct? 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SubjectViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.forecast_item,
+                R.layout.forecast_item_days,
                 parent,
                 false
             ), interaction
@@ -61,11 +63,10 @@ class WeatherForecastDaysAdapter(private val interaction: OnItemClickOfProduct? 
 
         @SuppressLint("SetTextI18n")
         fun bind(data: ListData) = with(this.itemView) {
-         //   findViewById<TextView>(R.id.tv_date_name).text = data.main.temp.toString()
 
-//            setOnClickListener {
-//                interaction?.onItemClicked(bindingAdapterPosition, data)
-//            }
+            findViewById<TextView>(R.id.tv_date).text =
+                itemView.context.getDayNameFromDate(data.dtTxt.substringBefore(" "))
+            findViewById<TextView>(R.id.tv_temp).text = "${data.main.tempMin} / ${data.main.tempMax}"
 
 
         }

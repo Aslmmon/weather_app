@@ -46,8 +46,8 @@ data class ListData(
     @SerializedName("dt_txt")
     val dtTxt: String,
 //    @ColumnInfo
-//    @SerializedName("main")
-//    val main: Main,
+    @SerializedName("main")
+    val main: Main,
 //    @ColumnInfo
 //    @SerializedName("pop")
 //    val pop: Double,
@@ -125,7 +125,7 @@ object DateConverter {
 
     @TypeConverter
     fun stringToList(data: String?): List<ListData>? {
-        if (data==null) return null
+        if (data == null) return null
         val gson = Gson()
         if (data == null) {
             return Collections.emptyList()
@@ -136,14 +136,14 @@ object DateConverter {
 
     @TypeConverter
     fun listToString(myObjects: List<ListData>?): String? {
-        if (myObjects==null) return null
+        if (myObjects == null) return null
         val gson = Gson()
         return gson.toJson(myObjects)
     }
 
     @TypeConverter
     fun dataToList(data: String?): List<DateWithData>? {
-        if (data==null) return null
+        if (data == null) return null
         val gson = Gson()
         if (data == null) {
             return Collections.emptyList()
@@ -154,7 +154,7 @@ object DateConverter {
 
     @TypeConverter
     fun listTodata(myObjects: List<DateWithData>?): String? {
-        if (myObjects==null) return null
+        if (myObjects == null) return null
         val gson = Gson()
         return gson.toJson(myObjects)
     }
