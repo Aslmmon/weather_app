@@ -13,4 +13,6 @@ interface ForecastDAO {
     suspend fun insertAll(listData: CitiesEntities)
 
 
+
+
 }

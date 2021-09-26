@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
+import com.floriaapp.core.entity.CitiesEntities
 import com.floriaapp.core.entity.DateWithData
 import com.weather.weather_app.databinding.ActivityForecastBinding
 import com.weather.weather_app.features.forecast.presentation.adapter.WeatherForecastsAdapter
@@ -11,7 +12,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ForecastActivity : AppCompatActivity() {
     private val foreacastViewModel: ForecastViewModel by viewModel()
-    lateinit var adapter:WeatherForecastsAdapter
+    lateinit var adapter: WeatherForecastsAdapter
     lateinit var binding: ActivityForecastBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,15 +20,22 @@ class ForecastActivity : AppCompatActivity() {
         binding = ActivityForecastBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initADapter()
-        val data =intent.extras
-        val countryName = data?.getString("name")
-        val countryID = data?.getInt("id")
+        val data = intent.extras
+        val cityEntity = data?.getParcelable<CitiesEntities>("name")
+        when(cityEntity?.WeatherData){
+            null ->{
+                foreacastViewModel.reuqestWeatherData(cityEntity?.name!!,cityEntity.cityEntityId)
+                foreacastViewModel.weatherData.observe(this, Observer {
+                    Log.i("data", it.toString())
+                    bindDatatoViews(it)
+                })
+            }
+            else->{
+                bindDatatoViews(cityEntity.WeatherData as MutableList<DateWithData>)
+            }
+        }
 
-        foreacastViewModel.reuqestWeatherData(countryName!!,countryID!!)
-        foreacastViewModel.weatherData.observe(this, Observer {
-            Log.i("data",it.toString())
-            bindDatatoViews(it)
-        })
+
     }
 
     private fun initADapter() {

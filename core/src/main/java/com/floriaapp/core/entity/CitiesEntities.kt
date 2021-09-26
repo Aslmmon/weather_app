@@ -1,16 +1,20 @@
 package com.floriaapp.core.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 typealias CitiesNeeded = MutableList<CitiesEntities>
 
 const val TABLE_NAME = "CityEntity"
 
 @Entity(tableName = TABLE_NAME)
+@Parcelize
 data class CitiesEntities(
-    @PrimaryKey(autoGenerate = true) val cityEntityId: Int ,
+    @PrimaryKey(autoGenerate = true) val cityEntityId: Int,
     val name: String,
-    var WeatherData: List<DateWithData>? = null
-)
+    var WeatherData: @RawValue List<DateWithData>? = null
+) : Parcelable
 

@@ -1,10 +1,12 @@
 package com.floriaapp.core.entity
 
 
+import android.os.Parcelable
 import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.parcel.Parcelize
 import java.lang.reflect.Type
 import java.util.*
 
@@ -29,40 +31,21 @@ class City(
 )
 
 @Entity(tableName = TABLE_FORECAST)
+@Parcelize
 data class DateWithData(
     @PrimaryKey(autoGenerate = true) var id: Int? = null,
     val date: String,
     @TypeConverters(DateConverter::class) val listNeeded: List<ListData>
-)
+):Parcelable
 
 
+@Parcelize
 data class ListData(
-//    @SerializedName("clouds")
-//    val clouds: Clouds,
-//    @ColumnInfo
-//    @SerializedName("dt")
-//    val dt: Double,
-//    @ColumnInfo
     @SerializedName("dt_txt")
     val dtTxt: String,
-//    @ColumnInfo
     @SerializedName("main")
     val main: Main,
-//    @ColumnInfo
-//    @SerializedName("pop")
-//    val pop: Double,
-////    @SerializedName("rain")
-////    val rain: Rain,
-////    @SerializedName("sys")
-////    val sys: Sys,
-//    @ColumnInfo
-//    @SerializedName("visibility")
-//    val visibility: Int,
-////    @SerializedName("weather")
-////    val weather: List<Weather>,
-////    @SerializedName("wind")
-////    val wind: Wind,
-)
+):Parcelable
 
 data class Wind(
     @SerializedName("deg")
@@ -78,6 +61,7 @@ data class Rain(
     val h: Double
 )
 
+@Parcelize
 data class Main(
     @SerializedName("feels_like")
     val feelsLike: Double,
@@ -97,7 +81,7 @@ data class Main(
     val tempMax: Double,
     @SerializedName("temp_min")
     val tempMin: Double
-)
+):Parcelable
 
 data class Weather(
     @SerializedName("description")

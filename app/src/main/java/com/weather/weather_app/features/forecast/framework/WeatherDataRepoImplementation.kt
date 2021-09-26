@@ -21,4 +21,5 @@ class WeatherDataRepoImplementation(
 
     override suspend fun saveAllWeatherData(weatherData: CitiesEntities) =
         forecastDAO.insertAll(weatherData)
+
 }

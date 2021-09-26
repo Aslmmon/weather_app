@@ -105,7 +105,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
                 isFromSearch = true,
                 searchFunctionality = { city ->
                     showToast(city.toString())
-                    Navigation.goToForecastActivity(city?.name!!, city.cityEntityId, this)
+                    Navigation.goToForecastActivity(city, this)
                 })
         }
         return super.onOptionsItemSelected(item)
@@ -145,8 +145,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
     }
 
     override fun onItemClicked(position: Int, item: CitiesEntities) {
-        Navigation.goToForecastActivity(item.name, item.cityEntityId, this)
-        //Toast.makeText(this,item.toString(),Toast.LENGTH_LONG).show()
+        Navigation.goToForecastActivity(item, this)
     }
 
     override fun onDeleteItemClicked(position: Int, item: CitiesEntities) {
