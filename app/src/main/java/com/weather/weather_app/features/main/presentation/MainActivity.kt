@@ -1,7 +1,6 @@
 package com.weather.weather_app.features.main.presentation
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -19,7 +18,6 @@ import com.weather.weather_app.R
 import com.weather.weather_app.common.Ext.showToast
 import com.weather.weather_app.common.Navigation
 import com.weather.weather_app.databinding.ActivityMainBinding
-import com.weather.weather_app.features.forecast.presentation.ForecastActivity
 import com.weather.weather_app.features.main.presentation.adapter.CityListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -86,7 +84,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
 
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-             //   showToast(location?.latitude.toString())
+                //   showToast(location?.latitude.toString())
 //                getCountryName(location?.latitude!!,location.longitude)
                 // Got last known location. In some rare situations this can be null.
             }
@@ -107,7 +105,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
                 isFromSearch = true,
                 searchFunctionality = { city ->
                     showToast(city.toString())
-                    Navigation.goToForecastActivity(this)
+                    Navigation.goToForecastActivity(city?.name!!, city.cityEntityId, this)
                 })
         }
         return super.onOptionsItemSelected(item)
@@ -147,7 +145,7 @@ class MainActivity : BaseActivity(), CityListAdapter.OnItemClickOfProduct {
     }
 
     override fun onItemClicked(position: Int, item: CitiesEntities) {
-        Navigation.goToForecastActivity(this)
+        Navigation.goToForecastActivity(item.name, item.cityEntityId, this)
         //Toast.makeText(this,item.toString(),Toast.LENGTH_LONG).show()
     }
 

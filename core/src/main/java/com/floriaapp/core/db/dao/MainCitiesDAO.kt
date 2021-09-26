@@ -10,8 +10,23 @@ interface MainCitiesListDAO {
     suspend fun getAll(): CitiesNeeded
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg citiesEntities: CitiesEntities)
+    suspend fun insertAll(vararg citiesEntities: CitiesEntities?)
 
     @Delete
-    suspend fun delete(stationEntity: CitiesEntities)
+    suspend fun delete(stationEntity: CitiesEntities?)
+
+//
+//    @Transaction
+//    @Query("SELECT * FROM cityentity")
+//    suspend fun getCitiesAndData(): CityAndData
 }
+
+
+//data class CityAndData(
+//    @Embedded val citiesEntities: CitiesEntities,
+//    @Relation(
+//        parentColumn = "cityEntityId",
+//        entityColumn = "id"
+//    )
+//    val ListData: DateWithData
+//)

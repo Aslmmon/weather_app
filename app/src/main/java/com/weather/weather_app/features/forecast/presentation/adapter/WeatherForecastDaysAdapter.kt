@@ -61,7 +61,7 @@ class WeatherForecastDaysAdapter(private val interaction: OnItemClickOfProduct? 
 
         @SuppressLint("SetTextI18n")
         fun bind(data: ListData) = with(this.itemView) {
-            findViewById<TextView>(R.id.tv_date_name).text = data.main.temp.toString()
+         //   findViewById<TextView>(R.id.tv_date_name).text = data.main.temp.toString()
 
 //            setOnClickListener {
 //                interaction?.onItemClicked(bindingAdapterPosition, data)

@@ -67,7 +67,7 @@ class WeatherForecastsAdapter(private val interaction: OnItemClickOfProduct? = n
             findViewById<RecyclerView>(R.id.rv_forecasts).adapter =adapter
             findViewById<RecyclerView>(R.id.rv_forecasts).layoutManager =LinearLayoutManager(itemView.context,LinearLayoutManager.HORIZONTAL,false)
 
-            adapter.submitList(data.listNeeded)
+           // adapter.submitList(data.listNeeded)
 
 //            setOnClickListener {
 //                interaction?.onItemClicked(bindingAdapterPosition, data)

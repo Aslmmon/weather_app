@@ -1,10 +1,7 @@
 package com.floriaapp.core.entity
 
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
@@ -13,9 +10,11 @@ import java.util.*
 
 typealias WeatherNeededData = List<ListData>
 
+const val TABLE_FORECAST = "forecastEntity"
+
 data class WeatherEntities(
-    @SerializedName("city")
-    val city: City,
+//    @SerializedName("city")
+//    val city: City,
     @SerializedName("cnt")
     val cnt: Int,
     @SerializedName("cod")
@@ -29,36 +28,40 @@ data class WeatherEntities(
 class City(
 )
 
-const val TABLE_FORECAST = "forecastEntity"
-
 @Entity(tableName = TABLE_FORECAST)
 data class DateWithData(
-    @PrimaryKey val date: String,
+    @PrimaryKey(autoGenerate = true) var id: Int? = null,
+    val date: String,
     @TypeConverters(DateConverter::class) val listNeeded: List<ListData>
 )
 
+
 data class ListData(
-    @SerializedName("clouds")
-    val clouds: Clouds,
-    @SerializedName("dt")
-    val dt: Double,
+//    @SerializedName("clouds")
+//    val clouds: Clouds,
+//    @ColumnInfo
+//    @SerializedName("dt")
+//    val dt: Double,
+//    @ColumnInfo
     @SerializedName("dt_txt")
     val dtTxt: String,
-    @SerializedName("main")
-    val main: Main,
-    @SerializedName("pop")
-    val pop: Double,
-    @SerializedName("rain")
-    val rain: Rain,
-    @SerializedName("sys")
-    val sys: Sys,
-    @SerializedName("visibility")
-    val visibility: Int,
-    @SerializedName("weather")
-    val weather: List<Weather>,
-    @SerializedName("wind")
-    val wind: Wind,
-    var datesOnly: String
+//    @ColumnInfo
+//    @SerializedName("main")
+//    val main: Main,
+//    @ColumnInfo
+//    @SerializedName("pop")
+//    val pop: Double,
+////    @SerializedName("rain")
+////    val rain: Rain,
+////    @SerializedName("sys")
+////    val sys: Sys,
+//    @ColumnInfo
+//    @SerializedName("visibility")
+//    val visibility: Int,
+////    @SerializedName("weather")
+////    val weather: List<Weather>,
+////    @SerializedName("wind")
+////    val wind: Wind,
 )
 
 data class Wind(
@@ -121,7 +124,8 @@ data class Sys(
 object DateConverter {
 
     @TypeConverter
-    fun stringToList(data: String?): List<ListData> {
+    fun stringToList(data: String?): List<ListData>? {
+        if (data==null) return null
         val gson = Gson()
         if (data == null) {
             return Collections.emptyList()
@@ -131,10 +135,40 @@ object DateConverter {
     }
 
     @TypeConverter
-    fun listToString(myObjects: List<ListData>): String {
+    fun listToString(myObjects: List<ListData>?): String? {
+        if (myObjects==null) return null
         val gson = Gson()
         return gson.toJson(myObjects)
     }
+
+    @TypeConverter
+    fun dataToList(data: String?): List<DateWithData>? {
+        if (data==null) return null
+        val gson = Gson()
+        if (data == null) {
+            return Collections.emptyList()
+        }
+        val listType: Type = object : TypeToken<List<DateWithData?>?>() {}.type
+        return gson.fromJson<List<DateWithData>>(data, listType)
+    }
+
+    @TypeConverter
+    fun listTodata(myObjects: List<DateWithData>?): String? {
+        if (myObjects==null) return null
+        val gson = Gson()
+        return gson.toJson(myObjects)
+    }
+
+
 }
 
+class MyTypeConverters {
+
+    @TypeConverter
+    fun appToString(app: Main): String = Gson().toJson(app)
+
+    @TypeConverter
+    fun stringToApp(string: String): Main = Gson().fromJson(string, Main::class.java)
+
+}
 

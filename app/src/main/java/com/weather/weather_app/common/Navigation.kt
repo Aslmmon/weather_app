@@ -5,7 +5,11 @@ import android.content.Intent
 import com.weather.weather_app.features.forecast.presentation.ForecastActivity
 
 object Navigation {
-    fun goToForecastActivity(activity:Activity){
-        activity.startActivity(Intent(activity,ForecastActivity::class.java))
+    fun goToForecastActivity(name:String, id: Int, activity:Activity){
+        val intent = Intent(activity,ForecastActivity::class.java)
+        intent.putExtra("name",name)
+        intent.putExtra("id",id)
+
+        activity.startActivity(intent)
     }
 }

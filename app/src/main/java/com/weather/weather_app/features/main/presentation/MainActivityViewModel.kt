@@ -35,9 +35,9 @@ class MainActivityViewModel(
         })
     }
 
-    fun addCity(city: CitiesEntities) {
+    fun addCity(city: CitiesEntities?) {
         launchDataLoad(execution = {
-            adddCity(city)
+            city?.let { adddCity(it) }
             getSavedLists()
         }, errorReturned = {
             Error.value = it.message.toString()

@@ -19,7 +19,11 @@ class ForecastActivity : AppCompatActivity() {
         binding = ActivityForecastBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initADapter()
-        foreacastViewModel.reuqestWeatherData()
+        val data =intent.extras
+        val countryName = data?.getString("name")
+        val countryID = data?.getInt("id")
+
+        foreacastViewModel.reuqestWeatherData(countryName!!,countryID!!)
         foreacastViewModel.weatherData.observe(this, Observer {
             Log.i("data",it.toString())
             bindDatatoViews(it)

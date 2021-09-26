@@ -16,7 +16,7 @@ class CustomToday(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
     fun setData(firstItem: ListData) {
         with(firstItem){
             findViewById<TextView>(R.id.tv_date_time).text = this.dtTxt
-            findViewById<TextView>(R.id.tv_temp).text = this.main.temp.toString()
+         //   findViewById<TextView>(R.id.tv_temp).text = this.main.temp.toString()
 
         }
 

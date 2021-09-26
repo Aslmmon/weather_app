@@ -16,7 +16,7 @@ class CitiesListAdapter(private val interaction: OnItemClickOfProduct? = null) :
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CitiesEntities>() {
 
-        override fun areItemsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) = oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) = oldItem.cityEntityId == newItem.cityEntityId
 
         override fun areContentsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) = oldItem == newItem
 

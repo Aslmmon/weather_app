@@ -5,7 +5,7 @@ import com.weather.weather_app.features.main.framework.MainHomeRepoImplementatio
 import org.koin.dsl.module
 
 val repositoriesModule = module {
-    factory { WeatherDataRepoImplementation(get()) }
+    factory { WeatherDataRepoImplementation(get(),get(),get()) }
     factory { MainHomeRepoImplementation(get()) }
 
 }
