@@ -52,11 +52,11 @@ class CustomDialog {
 
         val adapter = CitiesListAdapter(object : CitiesListAdapter.OnItemClickOfProduct {
             override fun onItemClicked(position: Int, item: CitiesEntities) {
-                dialog?.dismiss()
                 when (isFromSearch) {
                     true -> searchFunctionality?.invoke(item)
                     false -> AdditionFunctionality?.invoke(item)
                 }
+                dialog?.dismiss()
             }
 
         })

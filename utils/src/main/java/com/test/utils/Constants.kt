@@ -8,6 +8,10 @@ const val CITY_JSON_FILENAME="city.json"
 const val CitiesCounter = "city counter"
 const val CITY_DATA = "city data"
 const val DEFAULT_COUNTRY = "London"
+const val DEFAULT_COUNTRY_CODE = "UK"
+const val PermissionChecked = "permssion_location_request"
+const val GPSCHECKED = 20
+
 const val LOCATION_PERMISSON = 10
 
 

@@ -3,7 +3,7 @@ package com.weather.weather_app.common
 import android.app.Activity
 import android.content.Intent
 import android.provider.Settings
-import androidx.core.content.ContextCompat.startActivity
+import androidx.activity.result.ActivityResultLauncher
 import com.floriaapp.core.entity.CitiesEntities
 import com.test.utils.CITY_DATA
 import com.weather.weather_app.features.forecast.presentation.ForecastActivity
@@ -15,8 +15,9 @@ object Navigation {
         activity.startActivity(intent)
     }
 
-    fun gotoGpsActivity(activity: Activity) {
+    fun gotoGpsActivity(activity: Activity,permissionInt: Int) {
         val callGPSSettingIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-        activity.startActivity(callGPSSettingIntent)
+        //resultLauncher.launch(callGPSSettingIntent)
+        activity.startActivityForResult(callGPSSettingIntent,permissionInt)
     }
 }

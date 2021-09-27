@@ -115,7 +115,7 @@ fun Context.getDayNameFromDate(date: String): String? {
 @RequiresApi(Build.VERSION_CODES.O)
 fun Context.getTimeAmPmFromDate(time: String): String {
     val parser = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)
-    val formatter = DateTimeFormatter.ofPattern("HH:mm a")
+    val formatter = DateTimeFormatter.ofPattern("h:mm a")
 
     val time = LocalTime.parse(time, parser)
     return time.format(formatter)

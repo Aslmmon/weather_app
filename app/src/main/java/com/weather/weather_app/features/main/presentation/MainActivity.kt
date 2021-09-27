@@ -2,17 +2,16 @@ package com.weather.weather_app.features.main.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import com.floriaapp.core.entity.CitiesEntities
@@ -22,12 +21,11 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
+import com.test.utils.*
 import com.test.utils.Bases.BaseActivity
-import com.test.utils.CitiesCounter
-import com.test.utils.DEFAULT_COUNTRY
-import com.test.utils.LOCATION_PERMISSON
 import com.test.utils.PermissionUtils.hasPermission
 import com.weather.weather_app.R
+import com.weather.weather_app.common.Ext.enableGps
 import com.weather.weather_app.common.Ext.getCountryName
 import com.weather.weather_app.common.Ext.isGpsProviderOpen
 import com.weather.weather_app.common.Ext.showToast
@@ -59,8 +57,16 @@ class MainActivity : BaseActivity(), CitiesMainListAdapter.OnItemClickOfProduct 
         super.onCreate(savedInstanceState)
         mainActivityBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainActivityBinding.root)
+
+        /**
+         * initialization of adapter and setting adapter of REcyclerView to it
+         */
         initAdapterAndRecyclerView()
-        getPermission()
+
+        /**
+         * getting Permission for First Time Only
+         */
+        if (!isPerrmissionCheckd()) getPermission()
 
 
         with(mainActivityBinding) {
@@ -85,11 +91,11 @@ class MainActivity : BaseActivity(), CitiesMainListAdapter.OnItemClickOfProduct 
 
     override fun onResume() {
         super.onResume()
-        if (isGpsProviderOpen()) getCurrentLocation()
         mainActivityViewModel.getSavedLists()
     }
 
     private fun getPermission() {
+        sharedPrefrenceEditor.putBoolean(PermissionChecked, true).apply()
         val permissionApproved =
             applicationContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
         if (permissionApproved) {
@@ -103,22 +109,53 @@ class MainActivity : BaseActivity(), CitiesMainListAdapter.OnItemClickOfProduct 
     }
 
     private fun requestCurrentLocation() {
+
+        /**
+         * Checking of GPS is Enable , So Get Location
+         *
+         * if Not checked User is allowed to open GPS to get lastKnownLocation
+         *
+         *
+         */
         if (isGpsProviderOpen()) getCurrentLocation()
-        else Navigation.gotoGpsActivity(this)
+        else Navigation.gotoGpsActivity(this, GPSCHECKED)
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == GPSCHECKED) {
+            if (isGpsProviderOpen() and isPerrmissionCheckd()) {
+                getCurrentLocation()
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
+
+        /**
+         *
+         * Getting Location Login , dupend on FusedLocationCurrentLocation
+         *
+         */
         if (applicationContext.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
 
             val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(
                 LocationRequest.PRIORITY_HIGH_ACCURACY,
                 cancellationTokenSource.token
             )
-
             currentLocationTask.addOnCompleteListener { task: Task<Location> ->
+
+                /**
+                 *
+                 * Location Accessed then by Geocoder , getting Name Of Country and it's Code
+                 *
+                 * to be submittied in the list of MainListCities as Default and to be passed to APi of OpenWeatherAPi
+                 *
+                 *
+                 */
                 val result = if (task.isSuccessful && task.result != null) {
                     val result: Location = task.result
                     getCountryName(
@@ -145,6 +182,7 @@ class MainActivity : BaseActivity(), CitiesMainListAdapter.OnItemClickOfProduct 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+
             R.id.menu_search -> showCitiesDialog(
                 citiis = allCountriesList,
                 isFromSearch = true,
@@ -179,7 +217,7 @@ class MainActivity : BaseActivity(), CitiesMainListAdapter.OnItemClickOfProduct 
             mainHomeCountriesList = it
             sharedPrefrenceEditor.putInt(CitiesCounter, it.size).apply()
             with(adapter) {
-                submitList(it)
+                submitList(it.take(5).toMutableList())
                 notifyDataSetChanged()
             }
             mainActivityViewModel.checkForAllowanceOfAddingCities(it.size)
@@ -229,11 +267,8 @@ class MainActivity : BaseActivity(), CitiesMainListAdapter.OnItemClickOfProduct 
 
         if (requestCode == LOCATION_PERMISSON) {
             when {
-                grantResults.isEmpty() -> {
-                }
                 grantResults[0] == PackageManager.PERMISSION_GRANTED -> requestCurrentLocation()
-                else -> addDefultCountry(DEFAULT_COUNTRY, "UK")
-
+                else -> addDefultCountry(DEFAULT_COUNTRY, DEFAULT_COUNTRY_CODE)
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -267,6 +302,18 @@ class MainActivity : BaseActivity(), CitiesMainListAdapter.OnItemClickOfProduct 
         ) else null
     }
 
-    private fun maximumAllowedCities() = sharedPrefrence.getInt(CitiesCounter, 0) <= MAXIMUM_CITIES
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancellationTokenSource.cancel()
+
+    }
+
+    private fun maximumAllowedCities() = sharedPrefrence.getInt(CitiesCounter, 0) <= com.test.utils.MAXIMUM_CITIES
+
+    private fun isPerrmissionCheckd() = sharedPrefrence.getBoolean(PermissionChecked, false)
 
 }

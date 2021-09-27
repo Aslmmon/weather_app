@@ -7,4 +7,5 @@
     <string name="checkOpenLocation">Please Check opening Location from Settings</string>
     <string name="forecast">Forecast</string>
     <string name="empty_data_for_now_title">Checking For Data </string>
+    <string name="open_location">Open location please First</string>
 </resources>
