@@ -61,7 +61,7 @@ class WeatherForecastsAdapter(private val interaction: OnItemClickOfProduct? = n
         val interaction: OnItemClickOfProduct?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        @SuppressLint("SetTextI18n")
+        @SuppressLint("SetTextI18n", "CutPasteId")
         fun bind(data: DateWithData) = with(this.itemView) {
             findViewById<TextView>(R.id.tv_date_name).text = itemView.context.getDayNameFromDate(data.date)
             val adapter = WeatherForecastDaysAdapter()
@@ -71,11 +71,6 @@ class WeatherForecastsAdapter(private val interaction: OnItemClickOfProduct? = n
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
 
             adapter.submitList(data.listNeeded)
-
-//            setOnClickListener {
-//                interaction?.onItemClicked(bindingAdapterPosition, data)
-//            }
-
 
         }
 

@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.weather.weather_app.common.Ext
 
 import android.annotation.SuppressLint
@@ -13,16 +15,21 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
+import android.text.format.DateUtils
+import android.util.Log
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
@@ -31,6 +38,8 @@ import com.test.utils.R
 import com.weather.weather_app.di.getSharedPrefrences
 import java.io.*
 import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -69,12 +78,49 @@ fun ImageView.loadImage(src: String? = null, srcInt: Int? = null, noPlaceHolder:
         .into(this)
 }
 
+fun Context.isGpsProviderOpen(): Boolean {
+    val locationManager = getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
+    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+}
+
+fun Context.enableGps() {
+    val intent = Intent("android.location.GPS_ENABLED_CHANGE")
+    intent.putExtra("enabled", true)
+    sendBroadcast(intent)
+}
+
+fun Context.disableGps() {
+    val intent = Intent("android.location.GPS_ENABLED_CHANGE")
+    intent.putExtra("enabled", false)
+    sendBroadcast(intent)
+}
+
 @SuppressLint("SimpleDateFormat")
-fun Context.getDayNameFromDate(date: String): String {
-    val dateParsed = SimpleDateFormat("dd-MM-yyyy").parse(date)
-    val sdf = SimpleDateFormat("EEEE")
-    val dayOfTheWeek = sdf.format(dateParsed)
-    return dayOfTheWeek
+fun Context.getDayNameFromDate(date: String): String? {
+    return try {
+        val dateParsed = SimpleDateFormat("yyyy-MM-dd").parse(date)
+        val sdf = SimpleDateFormat("EEEE")
+        val dayOfTheWeek = sdf.format(dateParsed!!)
+        if (DateUtils.isToday(dateParsed.time)) resources.getString(R.string.today)
+        else dayOfTheWeek
+    }catch (e:Exception){
+        Log.i("error",e.message.toString())
+        null
+    }
+
+
+
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun Context.getTimeAmPmFromDate(time: String): String {
+    val parser = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)
+    val formatter = DateTimeFormatter.ofPattern("HH:mm a")
+
+    val time = LocalTime.parse(time, parser)
+    return time.format(formatter)
+
+
 }
 
 fun Context.verifyAvailableNetwork(): Boolean {
@@ -175,7 +221,7 @@ fun Context.getCountryName(latitude: Double, longitude: Double): String? {
         addresses = geocoder.getFromLocation(latitude, longitude, 1)
         var result: Address
         return if (addresses != null && addresses.isNotEmpty()) {
-            addresses[0].countryName
+            addresses[0].countryName + "," + addresses[0].countryCode
         } else null
     } catch (ignored: IOException) {
         //do something

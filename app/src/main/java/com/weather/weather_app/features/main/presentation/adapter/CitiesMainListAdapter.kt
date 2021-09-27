@@ -61,7 +61,7 @@ class CitiesMainListAdapter(private val interaction: OnItemClickOfProduct? = nul
 
         @SuppressLint("SetTextI18n")
         fun bind(data: CitiesEntities) = with(this.itemView) {
-            findViewById<TextView>(R.id.tv_cityName).text = data.name
+            findViewById<TextView>(R.id.tv_cityName).text = "${data.name},${data.country}"
             findViewById<ImageView>(R.id.iv_delete).setOnClickListener {
                 interaction?.onDeleteItemClicked(adapterPosition, data)
             }

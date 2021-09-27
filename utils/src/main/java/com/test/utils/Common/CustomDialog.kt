@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.floriaapp.core.entity.CitiesEntities
@@ -39,8 +38,8 @@ class CustomDialog {
 
     fun showCitiesDialog(
         activity: Activity,
-        functionNeeded: (((CitiesEntities)?) -> Unit)? = null,
-        citiis: List<CitiesEntities>,
+        AdditionFunctionality: (((CitiesEntities)?) -> Unit)? = null,
+        citiesList: List<CitiesEntities>,
         isFromSearch: Boolean = false,
         searchFunctionality: (((CitiesEntities)?) -> Unit)? = null
     ) {
@@ -56,18 +55,18 @@ class CustomDialog {
                 dialog?.dismiss()
                 when (isFromSearch) {
                     true -> searchFunctionality?.invoke(item)
-                    false -> functionNeeded?.invoke(item)
+                    false -> AdditionFunctionality?.invoke(item)
                 }
             }
 
         })
         if (isFromSearch) {
             searchEditText.visibility = View.VISIBLE
-            filterCitiesByQuery(searchEditText, citiis, adapter,activity)
+            filterCitiesByQuery(searchEditText, citiesList, adapter,activity)
         }
 
         view.findViewById<RecyclerView>(R.id.rv_cities).adapter = adapter
-        adapter.submitList(citiis)
+        adapter.submitList(citiesList)
 
 
         val window: Window? = dialog?.window

@@ -12,25 +12,27 @@ const val MAXIMUM_CITIES = 4
 
 
 class RequestWeatherData(
-    private val weatherDataRepo: ForecastRepo,
-    private val sharedPreferences: SharedPreferences
-) {
-    suspend operator fun invoke(countryName: String, countryID: Int): MutableList<DateWithData> {
+    private val weatherDataRepo: ForecastRepo) {
+    suspend operator fun invoke(
+        countryName: String,
+        countryID: Int,
+        countryCode: String
+    ): MutableList<DateWithData> {
         val updatedList = mutableListOf<DateWithData>()
-        weatherDataRepo.requestAllWeatherData(countryName).groupBy { it.dtTxt.substringBefore(" ") }
+        weatherDataRepo.requestAllWeatherData("${countryName},${countryCode}")
+            .groupBy { it.dtTxt.substringBefore(" ") }
             .mapValues { entry ->
                 Log.i("shit", entry.toString())
                 updatedList.add(DateWithData(date = entry.key, listNeeded = entry.value))
             }
-        if (sharedPreferences.getInt(CitiesCounter, 0) <= MAXIMUM_CITIES) {
             weatherDataRepo.saveAllWeatherData(
                 CitiesEntities(
                     id = countryID,
                     name = countryName,
-                    WeatherData = updatedList
+                    WeatherData = updatedList,
+                    country = countryCode
                 )
             )
-        }
         return updatedList
     }
 }

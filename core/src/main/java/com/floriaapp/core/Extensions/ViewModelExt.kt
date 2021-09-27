@@ -1,5 +1,6 @@
 package com.floriaapp.core.Extensions
 
+import android.accounts.NetworkErrorException
 import android.content.Context
 import android.content.res.Configuration
 import androidx.lifecycle.ViewModel
@@ -46,14 +47,12 @@ fun Throwable?.toErrorBody(): String? {
     return when (this) {
         is SocketTimeoutException -> " Check Your Network Connection , Try Again later "
         is ConnectException -> " Check Your Network Connection , Try Again later "
-        is UnknownHostException -> message.toString() + " Try again later "
+        is UnknownHostException -> "Check Your Network Connection , Try Again later"
         is HttpException -> {
-            //message.toString()
-            val errorBodyResponse = response()?.errorBody()?.string()
-            val gson = GsonBuilder().create()
-            return "error"
+            return "error in Parsing "
 
         }
+        is NetworkErrorException -> "Check Your Network Connection , Try Again later \""
         else -> this?.message.toString()
     }
 }

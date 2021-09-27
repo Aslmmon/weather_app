@@ -4,4 +4,7 @@
     <string name="add_cities_up_to_5_cities">Add Cities up to 5 cities</string>
     <string name="search">Search</string>
     <string name="feels_like_title">"Feels like "</string>
+    <string name="checkOpenLocation">Please Check opening Location from Settings</string>
+    <string name="forecast">Forecast</string>
+    <string name="empty_data_for_now_title">Checking For Data </string>
 </resources>

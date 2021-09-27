@@ -7,7 +7,7 @@ import com.weather.weather_app.features.main.framework.MainHomeRepoImplementatio
 import org.koin.dsl.module
 
 val useCasesModule = module {
-    factory { RequestWeatherData(get() as WeatherDataRepoImplementation,get()) }
+    factory { RequestWeatherData(get() as WeatherDataRepoImplementation) }
     factory { AddCity(get() as MainHomeRepoImplementation) }
     factory { RemoveCity(get() as MainHomeRepoImplementation) }
     factory { GetCitiesData(get() as MainHomeRepoImplementation) }

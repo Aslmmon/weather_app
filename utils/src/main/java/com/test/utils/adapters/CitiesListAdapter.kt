@@ -16,9 +16,11 @@ class CitiesListAdapter(private val interaction: OnItemClickOfProduct? = null) :
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CitiesEntities>() {
 
-        override fun areItemsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) = oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) =
+            oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) = oldItem == newItem
+        override fun areContentsTheSame(oldItem: CitiesEntities, newItem: CitiesEntities) =
+            oldItem == newItem
 
     }
     private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
@@ -57,7 +59,7 @@ class CitiesListAdapter(private val interaction: OnItemClickOfProduct? = null) :
 
         @SuppressLint("SetTextI18n")
         fun bind(data: CitiesEntities) = with(this.itemView) {
-            findViewById<TextView>(R.id.tv_cityName).text = data.name
+            findViewById<TextView>(R.id.tv_cityName).text = "${data.name},${data.country}"
             setOnClickListener {
                 interaction?.onItemClicked(adapterPosition, data)
             }
@@ -75,5 +77,6 @@ class CitiesListAdapter(private val interaction: OnItemClickOfProduct? = null) :
     }
 
 }
+
 data class Test(var id: Int, var name: String)
 
